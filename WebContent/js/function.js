@@ -65,6 +65,7 @@ function sendRequest(type, inputJSON) {
         		alert(JSON.stringify(response))
         	} else if(type == functionType.QUERY) { // to query
         		alert(JSON.stringify(response))
+        		document.getElementById("amount_query").value = response.result.message;
         		//alert(response.result.message)
         	} else if(type == functionType.ADDUSER) { // to add user
         		alert(response.result.status)
@@ -122,37 +123,10 @@ function transfer(sender, receiver, amount) {
 	         },
 	         "id": 2
 	     };
-	
 	sendRequest(functionType.TRANSFER, jsonForSender);
 	sendRequest(functionType.TRANSFER, jsonForReceiver);
-		 
 }
 
-
-/*function transfer(sender, receiver, amount) {
-	 var json =
-     {
-         "jsonrpc": "2.0",
-         "method": "invoke",
-         "params": {
-             "type": 1,
-             "chaincodeID": {
-                 //"name": "5078ced08aaf2b64718ccdf705b6f32f08b629f99ba77472757b49594b20955d6b8d441764567a3dd12de085da899426a45b3b0a2cb93d81df6e404ceca6c1ff"
-            	 "name": "f140ca79deaa27b98a2ec852e456e56211c6e866a3995348954b78b8d8aca270b08807a0282e615b3e671c2bae92e467f259ba19856327d3ea7a3f1df9ad7248"
-             },
-             "ctorMsg": {
-                 "function": "write",
-                 "args": [
-                     sender, receiver, amount
-                 ]
-             },
-             "secureContext": "user_type1_0"
-         },
-         "id": 2
-     };
-	 sendRequest(functionType.TRANSFER,json);
-}
-*/
 function query(userName) {
 
 	var chaincodeID = chaincode.USER;
@@ -187,7 +161,7 @@ function query(userName) {
     };
 	sendRequest(functionType.QUERY, json);
 }
-
+/*
 function addUser(userName, amount) {
 	var json =
     {
@@ -211,4 +185,4 @@ function addUser(userName, amount) {
 	
 	sendRequest(functionType.ADDUSER, json);
 }
-
+*/
