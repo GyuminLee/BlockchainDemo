@@ -8,61 +8,55 @@
     <link rel="stylesheet" href="css/style.css">
     
 	<!-- Script link -->
-	<script type="text/javascript" src="js/function.js"></script>
+	<script type="text/javascript" src="js/function.js"> </script>
 	
     <!-- Script -->
-     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'> </script>
-     
-    <!-- Func1 -->
-     <script>
-			transfer()
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'> </script>
+    
+	<script>
+     <!-- Func1(Parking) -->
             $(document).ready(function(){
                 $("button#button_func1").click(function(){
-                	transfer(document.getElementById("name_func1").value, "parking_service", document.getElementById("amount_func1").value)
+                	transfer(document.getElementById("name_func1").value, "parking", document.getElementById("amount_func1").value)
                 });
             });
-        </script>
-        
-    <!-- Func2 -->
-    <script>
+    <!-- Func2(car wash) -->
             $(document).ready(function(){
                 $("button#button_func2").click(function(){
-                	transfer(document.getElementById("name_func2").value, "washing_service", document.getElementById("amount_func2").value)
+                	transfer(document.getElementById("name_func2").value, "carwash", document.getElementById("amount_func2").value)
 			   });
             });
-        </script>
-        
-    <!-- Func3 -->
-    <!-- Empty Function-->
-    
+    <!-- Func3(Toll) -->
+            $(document).ready(function(){
+                $("button#button_func3").click(function(){
+                	transfer(document.getElementById("name_func3").value, "toll", document.getElementById("amount_func3").value)
+			   });
+            });
+    <!-- Func4(Uber)-->
+            $(document).ready(function(){
+                $("button#button_func4").click(function(){
+                	transfer(document.getElementById("name_func4").value, "uber", document.getElementById("amount_func4").value)
+			   });
+            });
     <!-- Func Query -->
-    <script>
             $(document).ready(function(){
                 $("button#button_query").click(function(){
 					query(document.getElementById("name_query").value);
                 });
             });
-        </script>
-        
     <!-- Func Transfer -->
-    <script>
-
             $(document).ready(function(){
                 $("button#button_transfer").click(function(){
                     transfer(document.getElementById("name_trans_from").value,document.getElementById("name_trans_to").value,document.getElementById("amount_transfer").value)
                 });
             });
-        </script>
-        
     <!-- Func Add user -->
-    <script>
-
             $(document).ready(function(){
                 $("button#button_adduser").click(function(){
 					addUser(document.getElementById("name_adduser").value, document.getElementById("amount_adduser").value)
                 });
             });
-        </script>
+	</script>
 </head>
 
 <body>   
@@ -73,56 +67,92 @@
     <!--func1_Parking-->
      <a href = "JavaScript:void(0)" 
      	style="position: absolute;left: 400px;top: 120px" 
-     	onclick = "document.getElementById('func1_on').style.display='block';document.getElementById('func1_off').style.display='block'">Parking Service</a>
+     	onclick = "document.getElementById('func1_on').style.display='block';document.getElementById('func1_off').style.display='block'">
+     	Parking Service</a>
     <div id="func1_on" class="white_content">
         <h2>Parking</h2>
         Name: <br><input type="text" id="name_func1"><br>
         Payment:<br><input type="text" id="amount_func1"><br>
-        <button id="button_func1" >Park & Pay</button>
-		<a href = "javascript:void(0)" 
-		   onclick = "document.getElementById('func1_on').style.display='none';document.getElementById('func1_off').style.display='none'">close</a>
+        <button id="button_func1" >Pay</button>
+        <button onclick = "document.getElementById('func1_on').style.display='none';document.getElementById('func1_off').style.display='none'">
+        Close</button>
 	</div>
    
     <div id="func1_off" class="black_overlay"></div>
   
-  
-  
     <!--func2_Washing-->
      <a href = "JavaScript:void(0)" 
      	style="position: absolute;left: 630px;top: 120px " 
-     	onclick = "document.getElementById('func2_on').style.display='block';document.getElementById('func2_off').style.display='block'">Washing Service</a>
+     	onclick = "document.getElementById('func2_on').style.display='block';document.getElementById('func2_off').style.display='block'">
+     	Washing Service</a>
     
     <div id="func2_on" class="white_content">
         <h2>Washing</h2>
         Name: <br><input type="text" id="name_func2"><br>
         Payment:<br><input type="text" id="amount_func2"><br>
-        <button id="button_func2" >Wash & Pay</button>    
-        <a href = "javascript:void(0)" onclick = "document.getElementById('func2_on').style.display='none';document.getElementById('func2_off').style.display='none'">close</a>
+        <button id="button_func2" >Pay</button>   
+        <button onclick = "document.getElementById('func2_on').style.display='none';document.getElementById('func2_off').style.display='none'">
+        Close</button>
 	</div>
     
     <div id="func2_off" class="black_overlay"></div>
     
     <!--func3_Toll-->
-    <a href = "JavaScript:void(0)" style="position: absolute;left: 850px;top: 120px " onclick = "document.getElementById('func3_on').style.display='block';document.getElementById('func3_off').style.display='block'">func3_click</a>
+	 <a href = "JavaScript:void(0)" 
+		style="position: absolute;left: 850px;top: 120px " 
+   		onclick = "document.getElementById('func3_on').style.display='block';document.getElementById('func3_off').style.display='block'">
+   		Toll Service</a>
     <div id="func3_on" class="white_content">
-        Nothing3
-        <a href = "javascript:void(0)" onclick = "document.getElementById('func3_on').style.display='none';document.getElementById('func3_off').style.display='none'">close</a></div>
+        <h2>Toll</h2>
+        Name: <br><input type="text" id="name_func3"><br>
+        Payment:<br><input type="text" id="amount_func3"><br>
+        <button id="button_func3" >Pay</button>   
+        <button onclick = "document.getElementById('func3_on').style.display='none';document.getElementById('func3_off').style.display='none'">
+        Close</button>
+    </div>
+    
     <div id="func3_off" class="black_overlay"></div>
   
+ 	<!-- func4_Uber -->
+  	 <a href = "JavaScript:void(0)" 
+ 		style="position: absolute;left: 650px;top: 300px " 
+ 	   	onclick = "document.getElementById('func4_on').style.display='block';document.getElementById('func4_off').style.display='block'">
+   		Uber Service</a>
+    <div id="func4_on" class="white_content">
+        <h2>Toll</h2>
+        Name: <br><input type="text" id="name_func4"><br>
+        Payment:<br><input type="text" id="amount_func4"><br>
+        <button id="button_func4" >Pay</button>   
+        <button onclick = "document.getElementById('func4_on').style.display='none';document.getElementById('func4_off').style.display='none'">
+        Close</button>
+    </div>
+    
+    <div id="func3_off" class="black_overlay"></div>
+  
+  
     <!--func_query-->
-    <a href = "JavaScript:void(0)" style="position: absolute;left: 130px;top: 50px " onclick = "document.getElementById('funcq_on').style.display='block';document.getElementById('funcq_off').style.display='block'">Query</a>
+	 <a href = "JavaScript:void(0)" 
+   		style="position: absolute;left: 130px;top: 50px " 
+  		onclick = "document.getElementById('funcq_on').style.display='block';document.getElementById('funcq_off').style.display='block'">
+  		Query</a>
     <div id="funcq_on" class="white_content">
         <h2>Query</h2>
         Name: <br>
         <input id="name_query" type="text"><br>
         Amount: <br>
         <input id="amount_query" type="text" readonly><br>
-        <button id="button_query">submit</button>       
-        <a href = "javascript:void(0)" onclick = "document.getElementById('funcq_on').style.display='none';document.getElementById('funcq_off').style.display='none'">close</a></div>
-    <div id="funcq_off" class="black_overlay"></div>
+        <button id="button_query">Submit</button>   
+        <button onclick = "document.getElementById('funcq_on').style.display='none';document.getElementById('funcq_off').style.display='none'">
+        Close</button>
+	</div>
+       
+	<div id="funcq_off" class="black_overlay"></div>
   
     <!--func_transfer-->
-    <a href = "JavaScript:void(0)" style="position: absolute;left: 130px;top: 70px " onclick = "document.getElementById('functrans_on').style.display='block';document.getElementById('functrans_off').style.display='block'">Transfer_test</a>
+     <a href = "JavaScript:void(0)" 
+    	style="position: absolute;left: 130px;top: 70px " 
+  		onclick = "document.getElementById('functrans_on').style.display='block';document.getElementById('functrans_off').style.display='block'">
+  		Transfer</a>
     <div id="functrans_on" class="white_content">
         <h2>Transfer</h2>
         From(Name):
@@ -131,28 +161,43 @@
         <input type="text" id="name_trans_to"><br>
         Amount:<br>
         <input id="amount_transfer" type="text"><br>
-        <button id="button_transfer">submit</button>        
-        <a href = "javascript:void(0)" onclick = "document.getElementById('functrans_on').style.display='none';document.getElementById('functrans_off').style.display='none'">close</a></div>
+        <button id="button_transfer">Submit</button>
+        <button onclick = "document.getElementById('functrans_on').style.display='none';document.getElementById('functrans_off').style.display='none'">
+        Close</button>
+	</div>
+            
     <div id="functrans_off" class="black_overlay"></div>
 
     <!--func_adduser-->
-    <a href = "JavaScript:void(0)" style="position: absolute;left: 130px;top: 90px " onclick = "document.getElementById('funcadduser_on').style.display='block';document.getElementById('funcadduser_off').style.display='block'">Add User</a>
+     <a href = "JavaScript:void(0)" 
+		style="position: absolute;left: 130px;top: 90px " 
+		onclick = "document.getElementById('funcadduser_on').style.display='block';document.getElementById('funcadduser_off').style.display='block'">
+		Add User</a>
     <div id="funcadduser_on" class="white_content">
-        <h2>Add User</h2>
+        <h2>Add User(X)</h2>
         Name: <br>
         <input type="text" id="name_adduser"><br>
         Amount:<br>
         <input type="text" id="amount_adduser"><br>
-        <button id="button_adduser">add</button>     
-        <a href = "javascript:void(0)" onclick = "document.getElementById('funcadduser_on').style.display='none';document.getElementById('funcadduser_off').style.display='none'">close</a></div>
+        <button id="button_adduser">add</button>    
+        <button onclick = "document.getElementById('funcadduser_on').style.display='none';document.getElementById('funcadduser_off').style.display='none'">
+        Close</button>
+	</div>
+    
     <div id="funcadduser_off" class="black_overlay"></div>
 
     <!--func_overall-->
-    <a href = "JavaScript:void(0)" style="position: absolute;left: 130px;top: 30px " onclick = "document.getElementById('func_on').style.display='block';document.getElementById('func_off').style.display='block'">Show All Accounts</a>
+	 <a href = "JavaScript:void(0)" 
+		style="position: absolute;left: 130px;top: 30px " 
+		onclick = "document.getElementById('func_on').style.display='block';document.getElementById('func_off').style.display='block'">
+		Show All Accounts</a>
     <div id="func_on" class="white_content">
-        <h2>Overall</h2>
-        <a href = "javascript:void(0)" onclick = "document.getElementById('func_on').style.display='none';document.getElementById('func_off').style.display='none'">close</a></div>
+        <h2>Overall(X)</h2>
+       <button onclick = "document.getElementById('func_on').style.display='none';document.getElementById('func_off').style.display='none'">
+       Close</button>
+	</div>
+  
     <div id="func_off" class="black_overlay"></div>
-
+    
 	</body>
 </html>
