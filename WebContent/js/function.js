@@ -98,7 +98,7 @@ function transfer(sender, receiver, amount) {
 	             "ctorMsg": {
 	                 "function": "change_money",
 	                 "args": [
-	                     sender,  -1 * (parseInt(amount))
+	                     sender,  '-'+amount
 	                 ]
 	             },
 	             "secureContext": userInfo.secureContext
