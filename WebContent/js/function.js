@@ -18,6 +18,9 @@ var chaincode = {
 		//uber
 		'UBER'		: "9f5c99265f9d21a773ddc9174c2cc250d4a778bcc57abeaff944695df0e97c59f13c957ed8743a3d60823e5a7a5c812ef793e40889da1ceb365842f6c6f62873"
 }
+var userInfo = {
+		'secureContext' : "user_type1_1"
+}
 
 /**
  Response Example
@@ -48,9 +51,9 @@ var chaincode = {
 function sendRequest(type, inputJSON) {
     $.ajax({
         type: "POST",
-        //peer url(found in bluxmix peer)
-        //url: "https://111e1fc508284145befca922026c9a2d-vp0.us.blockchain.ibm.com:5004/chaincode",
+        //vp1
         url: "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chaincode",
+        //vp0
         //url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chaincode",
         contentType: "application/json", //必须有
         dataType: "json", //type of return value
@@ -94,10 +97,10 @@ function transfer(sender, receiver, amount) {
 	             "ctorMsg": {
 	                 "function": "change_money",
 	                 "args": [
-	                     sender, amount * -1
+	                     sender,  -1 * (parseInt(amount))
 	                 ]
 	             },
-	             "secureContext": "user_type1_0"
+	             "secureContext": userInfo.secureContext
 	         },
 	         "id": 2
 	     };
@@ -107,8 +110,6 @@ function transfer(sender, receiver, amount) {
 	         "params": {
 	             "type": 1,
 	             "chaincodeID": {
-	                 //"name": "5078ced08aaf2b64718ccdf705b6f32f08b629f99ba77472757b49594b20955d6b8d441764567a3dd12de085da899426a45b3b0a2cb93d81df6e404ceca6c1ff"
-	            	 //"name": "03d578243c5c7176ca8f968931f88b90cf9f6ea6a33d330e2a86417d3f689b20b906a07cc55096335d09b244f1ee23d4b6bffc4963bdfbd7db2023f467d7a4db"
 	            	 "name" : chaincodeID
 	             },
 	             "ctorMsg": {
@@ -117,7 +118,7 @@ function transfer(sender, receiver, amount) {
 	                     receiver, amount
 	                 ]
 	             },
-	             "secureContext": "user_type1_0"
+	             "secureContext": userInfo.secureContext
 	         },
 	         "id": 2
 	     };
@@ -180,7 +181,7 @@ function query(userName) {
                     userName
                 ]
             },
-            "secureContext": "user_type1_0"
+            "secureContext": userInfo.secureContext
         },
         "id": 1
     };
@@ -203,7 +204,7 @@ function addUser(userName, amount) {
                     userName, amount
                 ]
             },
-            "secureContext": "user_type1_0"
+            "secureContext": userInfo.secureContext
         },
         "id": 2
     };
