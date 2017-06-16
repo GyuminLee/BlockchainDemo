@@ -19,7 +19,8 @@ var chaincode = {
 		'UBER'		: "9f5c99265f9d21a773ddc9174c2cc250d4a778bcc57abeaff944695df0e97c59f13c957ed8743a3d60823e5a7a5c812ef793e40889da1ceb365842f6c6f62873"
 }
 var userInfo = {
-		'secureContext' : "user_type1_1"
+		'secureContext' : "user_type1_1",
+	    'secureContext0' : "user_type1_0"
 }
 
 /**
@@ -160,7 +161,7 @@ function query(userName) {
     };
 	sendRequest(functionType.QUERY, json);
 }
-/*
+
 function addUser(userName, amount) {
 	var json =
     {
@@ -169,10 +170,10 @@ function addUser(userName, amount) {
         "params": {
             "type": 1,
             "chaincodeID": {
-            	"name": "f140ca79deaa27b98a2ec852e456e56211c6e866a3995348954b78b8d8aca270b08807a0282e615b3e671c2bae92e467f259ba19856327d3ea7a3f1df9ad7248"
+            	"name": chaincode.USER
             },
             "ctorMsg": {
-                "function": "add",
+                "function": "create_user",
                 "args": [
                     userName, amount
                 ]
@@ -184,4 +185,4 @@ function addUser(userName, amount) {
 	
 	sendRequest(functionType.ADDUSER, json);
 }
-*/
+
