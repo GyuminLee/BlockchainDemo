@@ -161,7 +161,7 @@ function query(userName) {
     };
 	sendRequest(functionType.QUERY, json);
 }
-
+/*
 function addUser(userName, amount) {
 	var json =
     {
@@ -185,4 +185,4 @@ function addUser(userName, amount) {
 	
 	sendRequest(functionType.ADDUSER, json);
 }
-
+*/
