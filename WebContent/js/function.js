@@ -66,7 +66,6 @@ function sendRequest(type, inputJSON) {
         	} else if(type == functionType.QUERY) { // to query
         		alert(JSON.stringify(response))
         		document.getElementById("amount_query").value = response.result.message;
-        		//alert(response.result.message)
         	} else if(type == functionType.ADDUSER) { // to add user
         		alert(response.result.status)
         	}
@@ -98,7 +97,7 @@ function transfer(sender, receiver, amount) {
 	             "ctorMsg": {
 	                 "function": "change_money",
 	                 "args": [
-	                     sender,  '-'+amount
+	                     sender,  '-' + amount
 	                 ]
 	             },
 	             "secureContext": userInfo.secureContext
