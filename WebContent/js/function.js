@@ -23,6 +23,8 @@ var userInfo = {
 	    'secureContext0' : "user_type1_0"
 }
 
+var latestStoredRFID;
+
 /**
  Response Example
  --------------------------------------------------------
@@ -160,6 +162,18 @@ function query(userName) {
         "id": 1
     };
 	sendRequest(functionType.QUERY, json);
+}
+
+function receiveRFID(response){
+	for (var i = 0; i < response.length; i++) {
+    	var currentTime = new Date(Date.parse(response[i].timestamp))
+    	console.log(currentTime)
+    	// if(currentTime > latestStoredRFID){
+    	// 	latestStoredRFID = currentTime
+    	// 	transfer(response[i].cardUID, "carwash", 10)
+    	// }
+	}
+
 }
 /*
 function addUser(userName, amount) {
