@@ -163,7 +163,6 @@ function query(userName) {
     };
 	sendRequest(functionType.QUERY, json);
 }
-<<<<<<< HEAD
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
 function myFunction(dropdownID) {
@@ -188,8 +187,7 @@ window.onclick = function(event) {
 function setUserinDropdown(userID, funcName) {
 	document.getElementById(funcName).value = userID;
 	document.getElementById(funcName).innerHTML =userID;
-=======
-
+}
 function receiveRFID(response){
 	for (var i = 0; i < response.length; i++) {
     	var currentTime = new Date(Date.parse(response[i].timestamp))
@@ -199,8 +197,6 @@ function receiveRFID(response){
     	// 	transfer(response[i].cardUID, "carwash", 10)
     	// }
 	}
-
->>>>>>> c4d0c720983b4bb9e9f4eb61745ba346408a82c1
 }
 /*
 function addUser(userName, amount) {
