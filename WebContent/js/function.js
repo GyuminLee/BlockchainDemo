@@ -23,7 +23,7 @@ var userInfo = {
 	    'secureContext0' : "user_type1_0"
 }
 
-var latestStoredRFID;
+var latestStoredRFID = new Date(2017,5,22);
 
 /**
  Response Example
@@ -65,12 +65,15 @@ function sendRequest(type, inputJSON) {
         	//TODO showing message of the result after get response
         	if(type == functionType.TRANSFER) { // to transfer
         		//alert(response.result.status)
-        		alert(JSON.stringify(response))
+        		//alert(JSON.stringify(response))
         	} else if(type == functionType.QUERY) { // to query
-        		alert(JSON.stringify(response))
+        		//alert(JSON.stringify(response))
         		document.getElementById("amount_query").value = response.result.message;
+        		console.log(inputJSON.params.ctorMsg.args[0])
+        		console.log(response.result.message)
+        		showLCD(inputJSON.params.ctorMsg.args[0],response.result.message)
         	} else if(type == functionType.ADDUSER) { // to add user
-        		alert(response.result.status)
+        		//alert(response.result.status)
         	}
         }
     });
@@ -165,15 +168,29 @@ function query(userName) {
 }
 
 function receiveRFID(response){
-	for (var i = 0; i < response.length; i++) {
+	for (var i = response.length-1; i >=0 ; i--) {
     	var currentTime = new Date(Date.parse(response[i].timestamp))
-    	console.log(currentTime)
-    	// if(currentTime > latestStoredRFID){
-    	// 	latestStoredRFID = currentTime
-    	// 	transfer(response[i].cardUID, "carwash", 10)
-    	// }
+    	//console.log(latestStoredRFID)
+    	if(currentTime > latestStoredRFID){
+    		latestStoredRFID = currentTime
+    		console.log("Update timestamp" + latestStoredRFID)
+    		// transfer(response[i].cardUID, "carwash", 10)
+    		query(response[i].cardUID)
+    	}
 	}
 
+}
+
+function showLCD(userName, balance){
+	 $.ajax({
+        type: "GET",
+        url: "http://10.223.90.227:5000/lcd?line1="+userName+"&line2="+balance,
+        contentType: "application/json",
+        dataType: "json",
+        success: function (response,tag) {
+            console.log("success")
+        }
+    });
 }
 /*
 function addUser(userName, amount) {
