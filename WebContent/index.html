@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<<<<<<< HEAD
 <title>Blockchain Demo</title>
 
 <!-- CSS link -->
@@ -45,6 +46,69 @@
                 });
     -->
 	 });
+=======
+    <title>Blockchain Demo</title>
+
+    <link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="js/function.js"> </script>
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'> </script>
+    
+	<script>
+        $(document).ready(function(){
+            window.setInterval(function(){
+                $.ajax({
+                    type: "GET",
+                    url: "http://10.223.90.227:5000/rfid/",
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (response,tag) {
+                        //alert(JSON.stringify(response))
+                        receiveRFID(response)
+                    }
+                });
+            }, 1000);
+
+
+            $("button#button_func1").click(function(){
+            	transfer(document.getElementById("name_func1").value, "parking", document.getElementById("amount_func1").value)
+            });
+        
+            $("button#button_func2").click(function(){
+            	transfer(document.getElementById("name_func2").value, "carwash", document.getElementById("amount_func2").value)
+		   });
+        
+
+        
+            $("button#button_func3").click(function(){
+            	transfer(document.getElementById("name_func3").value, "toll", document.getElementById("amount_func3").value)
+		   });
+        
+
+        
+            $("button#button_func4").click(function(){
+            	transfer(document.getElementById("name_func4").value, "uber", document.getElementById("amount_func4").value)
+		   });
+       
+
+       
+            $("button#button_query").click(function(){
+				query(document.getElementById("name_query").value);
+            });
+       
+
+        
+            $("button#button_transfer").click(function(){
+                transfer(document.getElementById("name_trans_from").value,document.getElementById("name_trans_to").value,document.getElementById("amount_transfer").value)
+            });
+       
+
+        
+            $("button#button_adduser").click(function(){
+				addUser(document.getElementById("name_adduser").value, document.getElementById("amount_adduser").value)
+            });
+        });
+
+>>>>>>> c4d0c720983b4bb9e9f4eb61745ba346408a82c1
 	</script>
 </head>
 
