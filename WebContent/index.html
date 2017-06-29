@@ -109,11 +109,12 @@
 		style="position: absolute; left: 850px; top: 120px"
 		onclick="document.getElementById('func3_on').style.display='block';document.getElementById('func3_off').style.display='block'">
 		Toll Service</a>
+		
 	<div id="func3_on" class="white_content">
 		<h2>Toll</h2>
 		Name: <br>
 		<div class="dropdown">
-			<button onclick="myFunction(func3Dropdown)" class="dropbtn" id="name_func3">Name</button>
+			<button onclick="myFunction('func3Dropdown')" class="dropbtn" id="name_func3">Name</button>
 			<div id="func3Dropdown" class="dropdown-content">
 				<a onclick="setUserinDropdown('amy','name_func3')">amy</a> 
 				<a onclick="setUserinDropdown('bob','name_func3')">bob</a>
@@ -137,7 +138,7 @@
 		<h2>Uber</h2>
 		Name: <br>
 		<div class="dropdown">
-			<button onclick="myFunction(func4Dropdown)" class="dropbtn" id="name_func4">Name</button>
+			<button onclick="myFunction('func4Dropdown')" class="dropbtn" id="name_func4">Name</button>
 			<div id="func4Dropdown" class="dropdown-content">
 				<a onclick="setUserinDropdown('amy','name_func4')">amy</a> 
 				<a onclick="setUserinDropdown('bob','name_func4')">bob</a>
@@ -162,7 +163,7 @@
 		<h2>Query</h2>
 		Name: <br>
 		<div class="dropdown">
-			<button onclick="myFunction(funcQueryDropdown)" class="dropbtn" id="name_query">Name</button>
+			<button onclick="myFunction('funcQueryDropdown')" class="dropbtn" id="name_query">Name</button>
 			<div id="funcQueryDropdown" class="dropdown-content">
 				<a onclick="setUserinDropdown('amy','name_query')">amy</a> 
 				<a onclick="setUserinDropdown('bob','name_query')">bob</a>
@@ -187,7 +188,7 @@
 		<h2>Transfer</h2>
 		From(Name):
 		<div class="dropdown">
-			<button onclick="myFunction(funcTransFromDropdown)" class="dropbtn" id="name_trans_from">Name</button>
+			<button onclick="myFunction('funcTransFromDropdown')" class="dropbtn" id="name_trans_from">Name</button>
 			<div id="funcTransFromDropdown" class="dropdown-content">
 				<a onclick="setUserinDropdown('amy','name_trans_from')">amy</a> 
 				<a onclick="setUserinDropdown('bob','name_trans_from')">bob</a>
@@ -201,6 +202,7 @@
 				<a onclick="setUserinDropdown('bob','name_trans_to')">bob</a>
 			</div>
 		</div>
+		<br> Amount: <br>
 		<input id="amount_transfer" type="text"><br>
 		<button id="button_transfer">Submit</button>
 		<button

@@ -191,6 +191,7 @@ function setUserinDropdown(userID, funcName) {
 	document.getElementById(funcName).value = userID;
 	document.getElementById(funcName).innerHTML =userID;
 }
+
 function receiveRFID(response){
 	for (var i = response.length-1; i >=0 ; i--) {
     	var currentTime = new Date(Date.parse(response[i].timestamp))
