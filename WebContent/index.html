@@ -10,7 +10,8 @@
     
 	<script>
         $(document).ready(function(){
-            window.setInterval(function(){
+            
+        	window.setInterval(function(){
                 $.ajax({
                     type: "GET",
                     url: "http://10.223.90.227:5000/rfid/",
@@ -196,7 +197,7 @@
 		</div>
 		To(Name):
 		<div class="dropdown">
-			<button onclick="myFunction(funcTransToDropdown)" class="dropbtn" id="name_trans_to">Name</button>
+			<button onclick="myFunction('funcTransToDropdown')" class="dropbtn" id="name_trans_to">Name</button>
 			<div id="funcTransToDropdown" class="dropdown-content">
 				<a onclick="setUserinDropdown('amy','name_trans_to')">amy</a> 
 				<a onclick="setUserinDropdown('bob','name_trans_to')">bob</a>

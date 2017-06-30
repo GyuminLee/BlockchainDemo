@@ -23,6 +23,17 @@ var userInfo = {
 	    'secureContext0' : "user_type1_0"
 }
 
+var deviceInfo = {
+		'DEVICE_PARKING' : "",
+		'DEVICE_CARWASH' : ""
+}
+
+var priceInfo = {
+		'PRICE_PARKING' : "",
+		'PRICE_CARWASH' : ""
+}
+
+
 var latestStoredRFID = new Date(2017,5,22);
 
 /**
@@ -192,6 +203,8 @@ function setUserinDropdown(userID, funcName) {
 	document.getElementById(funcName).innerHTML =userID;
 }
 
+
+
 function receiveRFID(response){
 	for (var i = response.length-1; i >=0 ; i--) {
     	var currentTime = new Date(Date.parse(response[i].timestamp))
@@ -199,7 +212,7 @@ function receiveRFID(response){
     	if(currentTime > latestStoredRFID){
     		latestStoredRFID = currentTime
     		console.log("Update timestamp" + latestStoredRFID)
-    		// transfer(response[i].cardUID, "carwash", 10)
+    		//transfer(response[i].cardUID, "carwash", 10)
     		query(response[i].cardUID)
     	}
 	}
