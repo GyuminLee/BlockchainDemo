@@ -10,11 +10,14 @@
     
 	<script>
         $(document).ready(function(){
+			//Parking
+			checkNewData("http://10.223.90.210:5000/rfid/");
             
-        	window.setInterval(function(){
+			//Carwashing
+       /* 	window.setInterval(function(){
                 $.ajax({
                     type: "GET",
-                    url: "http://10.223.90.227:5000/rfid/",
+                    url: "http://10.223.90.210:5000/rfid/",
                     contentType: "application/json",
                     dataType: "json",
                     success: function (response,tag) {
@@ -23,7 +26,7 @@
                     }
                 });
             }, 3000);
-
+      	*/
             $("button#button_func1").click(function(){
             	transfer(document.getElementById("name_func1").value, "parking", document.getElementById("amount_func1").value)
             });
@@ -66,8 +69,8 @@
 		<div class="dropdown">
 			<button onclick="myFunction('func1Dropdown')" class="dropbtn" id="name_func1">Name</button>
 			<div id="func1Dropdown" class="dropdown-content">
-				<a onclick="setUserinDropdown('amy','name_func1')">amy</a>
-				<a onclick="setUserinDropdown('bob','name_func1')">bob</a>
+				<a onclick="setUserinDropdown('car1','name_func1')">car1</a>
+				<a onclick="setUserinDropdown('car2','name_func1')">car2</a>
 			</div>
 		</div>
 		<br>
@@ -92,8 +95,8 @@
 		<div class="dropdown">
 			<button onclick="myFunction('func2Dropdown')" class="dropbtn" id="name_func2">Name</button>
 			<div id="func2Dropdown" class="dropdown-content">
-				<a onclick="setUserinDropdown('amy','name_func2')">amy</a> 
-				<a onclick="setUserinDropdown('bob','name_func2')">bob</a>
+				<a onclick="setUserinDropdown('car1','name_func2')">car1</a> 
+				<a onclick="setUserinDropdown('car2','name_func2')">car2</a>
 			</div>
 		</div>
 		<br> Payment:<br> <input type="text" id="amount_func2"><br>
@@ -117,8 +120,8 @@
 		<div class="dropdown">
 			<button onclick="myFunction('func3Dropdown')" class="dropbtn" id="name_func3">Name</button>
 			<div id="func3Dropdown" class="dropdown-content">
-				<a onclick="setUserinDropdown('amy','name_func3')">amy</a> 
-				<a onclick="setUserinDropdown('bob','name_func3')">bob</a>
+				<a onclick="setUserinDropdown('car1','name_func3')">car1</a> 
+				<a onclick="setUserinDropdown('car2','name_func3')">car2</a>
 			</div>
 		</div>
 		<br> Payment:<br> <input type="text" id="amount_func3"><br>
@@ -141,8 +144,8 @@
 		<div class="dropdown">
 			<button onclick="myFunction('func4Dropdown')" class="dropbtn" id="name_func4">Name</button>
 			<div id="func4Dropdown" class="dropdown-content">
-				<a onclick="setUserinDropdown('amy','name_func4')">amy</a> 
-				<a onclick="setUserinDropdown('bob','name_func4')">bob</a>
+				<a onclick="setUserinDropdown('car1','name_func4')">car1</a> 
+				<a onclick="setUserinDropdown('car2','name_func4')">car2</a>
 			</div>
 		</div>
 		<br> Payment:<br> <input type="text" id="amount_func4"><br>
@@ -166,8 +169,12 @@
 		<div class="dropdown">
 			<button onclick="myFunction('funcQueryDropdown')" class="dropbtn" id="name_query">Name</button>
 			<div id="funcQueryDropdown" class="dropdown-content">
-				<a onclick="setUserinDropdown('amy','name_query')">amy</a> 
-				<a onclick="setUserinDropdown('bob','name_query')">bob</a>
+				<a onclick="setUserinDropdown('car1','name_query')">car1</a> 
+				<a onclick="setUserinDropdown('car2','name_query')">car2</a>
+				<a onclick="setUserinDropdown('parking','name_query')">parking</a>
+				<a onclick="setUserinDropdown('carwashing','name_query')">carwashing</a>
+				<a onclick="setUserinDropdown('toll','name_query')">toll</a>
+				<a onclick="setUserinDropdown('uber','name_query')">uber</a>
 			</div>
 		</div>
 		<br> Amount: <br> <input id="amount_query" type="text"
@@ -191,16 +198,16 @@
 		<div class="dropdown">
 			<button onclick="myFunction('funcTransFromDropdown')" class="dropbtn" id="name_trans_from">Name</button>
 			<div id="funcTransFromDropdown" class="dropdown-content">
-				<a onclick="setUserinDropdown('amy','name_trans_from')">amy</a> 
-				<a onclick="setUserinDropdown('bob','name_trans_from')">bob</a>
+				<a onclick="setUserinDropdown('car1','name_trans_from')">car1</a> 
+				<a onclick="setUserinDropdown('car2','name_trans_from')">car2</a>
 			</div>
 		</div>
 		To(Name):
 		<div class="dropdown">
 			<button onclick="myFunction('funcTransToDropdown')" class="dropbtn" id="name_trans_to">Name</button>
 			<div id="funcTransToDropdown" class="dropdown-content">
-				<a onclick="setUserinDropdown('amy','name_trans_to')">amy</a> 
-				<a onclick="setUserinDropdown('bob','name_trans_to')">bob</a>
+				<a onclick="setUserinDropdown('car1','name_trans_to')">car1</a> 
+				<a onclick="setUserinDropdown('car2','name_trans_to')">car2</a>
 			</div>
 		</div>
 		<br> Amount: <br>

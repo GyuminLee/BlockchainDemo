@@ -24,8 +24,8 @@ var userInfo = {
 }
 
 var deviceInfo = {
-		'DEVICE_PARKING' : "",
-		'DEVICE_CARWASH' : ""
+		'DEVICE_PARKING' : "http://10.223.90.227:5000/rfid/",
+		'DEVICE_CARWASH' : "http://10.223.90.179:5000/rfid/"
 }
 
 var priceInfo = {
@@ -61,6 +61,20 @@ var latestStoredRFID = new Date(2017,5,22);
 }
  ---------------------------------------------------------
  */
+function checkNewData(deviceURL) {
+	window.setInterval(function(){
+		$.ajax({
+			type: "GET",
+			url: deviceURL ,
+			contentType: "application/json",
+			dataType: "json",
+			success: function (response,tag) {
+				//alert(JSON.stringify(response))
+				receiveRFID(response)
+			}
+		});
+	}, 3000);
+}
 
 function sendRequest(type, inputJSON) {
     $.ajax({
@@ -75,8 +89,10 @@ function sendRequest(type, inputJSON) {
         success: function (response,tag) {
         	//TODO showing message of the result after get response
         	if(type == functionType.TRANSFER) { // to transfer
+        		console.log(JSON.stringify(response))
+        		showLCD(response.result.status, "Transfer success")
         		//alert(response.result.status)
-        		//alert(JSON.stringify(response))
+        		//galert(JSON.stringify(response))
         	} else if(type == functionType.QUERY) { // to query
         		//alert(JSON.stringify(response))
         		document.getElementById("amount_query").value = response.result.message;
@@ -209,10 +225,11 @@ function receiveRFID(response){
 	for (var i = response.length-1; i >=0 ; i--) {
     	var currentTime = new Date(Date.parse(response[i].timestamp))
     	//console.log(latestStoredRFID)
-    	if(currentTime > latestStoredRFID){
+    	if(currentTime > latestStoredRFID){//Success find new RFID
     		latestStoredRFID = currentTime
     		console.log("Update timestamp" + latestStoredRFID)
-    		//transfer(response[i].cardUID, "carwash", 10)
+    		//transfer(response[i].cardUID, "parking", 10)
+    		
     		query(response[i].cardUID)
     	}
 	}
@@ -221,7 +238,7 @@ function receiveRFID(response){
 function showLCD(userName, balance){
 	 $.ajax({
         type: "GET",
-        url: "http://10.223.90.227:5000/lcd?line1="+userName+"&line2="+balance,
+        url: "http://10.223.90.210:5000/lcd?line1="+userName+"&line2="+balance,
         contentType: "application/json",
         dataType: "json",
         success: function (response,tag) {
