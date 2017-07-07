@@ -33,6 +33,11 @@ var priceInfo = {
 		'PRICE_CARWASH' : ""
 }
 
+var RFIDInfo = {
+		//'car1' : "5b36312c2032362c2037352c203131342c2033305d"//coin3
+		//'car2' : "5b36312c203139322c2033392c2039382c203138345d"//coin2
+}
+
 
 var latestStoredRFID = new Date(2017,5,22);
 
@@ -83,13 +88,14 @@ function sendRequest(type, inputJSON) {
         url: "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chaincode",
         //vp0
         //url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chaincode",
+        async: false,
         contentType: "application/json", //必须有
         dataType: "json", //type of return value
         data: JSON.stringify(inputJSON),
         success: function (response,tag) {
         	//TODO showing message of the result after get response
         	if(type == functionType.TRANSFER) { // to transfer
-        		console.log(JSON.stringify(response))
+        	//console.log(JSON.stringify(response))
         		showLCD(response.result.status, "Transfer success")
         		//alert(response.result.status)
         		//galert(JSON.stringify(response))
@@ -195,7 +201,7 @@ function query(userName) {
 }
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
-function myFunction(dropdownID) {
+function dropDownFunction(dropdownID) {
     document.getElementById(dropdownID).classList.toggle('show');
 }
 
@@ -228,9 +234,10 @@ function receiveRFID(response){
     	if(currentTime > latestStoredRFID){//Success find new RFID
     		latestStoredRFID = currentTime
     		console.log("Update timestamp" + latestStoredRFID)
-    		//transfer(response[i].cardUID, "parking", 10)
     		
-    		query(response[i].cardUID)
+    		transfer(response[i].cardUID, "parking", 10)
+    		
+    		//query(response[i].cardUID)
     	}
 	}
 }
