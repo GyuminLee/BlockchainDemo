@@ -1,7 +1,4 @@
-/**
- * Function for blockchain
- */
-var result_bluemix = -1;
+
 var functionType = {
 	'TRANSFER'	: 1,
 	'QUERY'		: 2,
@@ -10,13 +7,9 @@ var functionType = {
 var chaincode = {
 		//car1, car2
 		'USER'		: "3606ca94ffef3a1d3be43923f3651a15cd1f9456fbf80b7b6d415024339e96e7a7173a3d784c0d8a3495f37a89df6bf24d3a830b35fa241edf5cf38f8e0e0899",
-		//parking
 		'PARKING' 	: "03d578243c5c7176ca8f968931f88b90cf9f6ea6a33d330e2a86417d3f689b20b906a07cc55096335d09b244f1ee23d4b6bffc4963bdfbd7db2023f467d7a4db",
-		//carwash
 		'CARWASH' 	: "35f13c114e1c01b695ad27dffbd652519c008e475244aca1fc476f2450a9716f6cf7e0a11ccd11381f8d4ce4738dcf08139e8b758f8b3803ce73427ab9a91356",
-		//toll
 		'TOLL'		: "a4881970fef277137a943c3db3bbca9edaac928f123b5fe34f6add93fe94e9209c24775e5d9242578a331bda252523d68ecd7ded941e0a806ecfa925eb66f39b",
-		//uber
 		'UBER'		: "9f5c99265f9d21a773ddc9174c2cc250d4a778bcc57abeaff944695df0e97c59f13c957ed8743a3d60823e5a7a5c812ef793e40889da1ceb365842f6c6f62873"
 }
 var userInfo = {
@@ -25,89 +18,57 @@ var userInfo = {
 }
 
 var deviceInfo = {
-		'DEVICE_PARKING' : "http://10.223.90.227:5000/",
-		'DEVICE_CARWASH' : "http://10.223.90.99:5000/"
+		'DEVICE_PARKING' : "http://10.223.90.210:5000/"
+		//'DEVICE_CARWASH' : "http://10.223.90.99:5000/"
 }
 
 var priceInfo = {
-		'PRICE_PARKING' : "",
-		'PRICE_CARWASH' : ""
+		'PRICE_PARKING' : "10",
+		'PRICE_CARWASH' : "50"
 }
 
+var userList = [
+	"car1",
+	"car2",
+	"car3",
+	"car4"
+]
 
 var latestStoredRFID = new Date(2017,5,22);
+var result_bluemix = -1;
+var UPDATEDASH_FLAG = 0;
+var NUM_USER = 2 + userList.length;
+var TRANS_COUNT = 0;
 
-/**
- Response Example
- --------------------------------------------------------
-  Success : 
- {
-  "jsonrpc": "2.0",
-  "result": {
-    "status": "OK",
-    "message": "a38e610c-b1f2-4985-970c-d5198c788ed4"
-  },
-  "id": 2
-}
----------------------------------------------------------
-  Error :
-    {
-  "jsonrpc": "2.0",
-  "error": {
-    "code": -32700,
-    "message": "syntax error",
-    "data": "detail"
-  },
-  "id": 123
-}
- ---------------------------------------------------------
- */
-function checkNewData(deviceURL) {
-	window.setInterval(function(){
-		$.ajax({
+function checkNewData() {
+	Object.keys(deviceInfo).forEach(function(key,index) {
+
+	    $.ajax({
 			type: "GET",
-			url: deviceURL ,
+			url: deviceInfo[key] + "rfid",
 			contentType: "application/json",
 			dataType: "json",
 			success: function (response,tag) {
-				//alert(JSON.stringify(response))
 				receiveRFID(response)
 			}
 		});
-	}, 3000);
+	});
 }
 
-function sendRequest(type, inputJSON) {
-    $.ajax({
-        type: "POST",
-        //vp1
-        url: "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chaincode",
-        //vp0
-        //url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chaincode",
-        contentType: "application/json", //必须有
-		async:false,
-        dataType: "json", //type of return value
-        data: JSON.stringify(inputJSON),
-        success: function (response,tag) {
-        	//TODO showing message of the result after get response
-        	if(type == functionType.TRANSFER) { // to transfer
-        		console.log(JSON.stringify(response))
-        		showLCD(response.result.status, "Transfer success")
-        		//alert(response.result.status)
-        		//galert(JSON.stringify(response))
-        	} else if(type == functionType.QUERY) { // to query
-        		//alert(JSON.stringify(response))
-				result_bluemix = parseInt(response.result.message);
-				//alert(result_bluemix)
-        		document.getElementById("amount_query").value = response.result.message;
-        		console.log(inputJSON.params.ctorMsg.args[0])
-        		console.log(response.result.message)
-        		showLCD(inputJSON.params.ctorMsg.args[0],response.result.message)
-        	} else if(type == functionType.ADDUSER) { // to add user
-        		//alert(response.result.status)
-        	}
-        }
-    });
+//TODO seperate newdate for different device
+function receiveRFID(response){
+	for (var i = response.length-1; i >=0 ; i--) {
+    	var currentTime = new Date(Date.parse(response[i].timestamp))
+    	//console.log(latestStoredRFID)
+    	
+    	if(currentTime > latestStoredRFID){
+    	//Success find new RFID
+    		latestStoredRFID = currentTime
+    		console.log("Update timestamp" + latestStoredRFID)
+    		showLCD("transaction", "processing")
+    		transfer(response[i].cardUID, "parking", 10)
+    	}
+	}
 }
 
 function transfer(sender, receiver, amount) {
@@ -141,6 +102,7 @@ function transfer(sender, receiver, amount) {
 	         },
 	         "id": 2
 	     };
+
 	var jsonForReceiver = {
 	         "jsonrpc": "2.0",
 	         "method": "invoke",
@@ -159,18 +121,15 @@ function transfer(sender, receiver, amount) {
 	         },
 	         "id": 2
 	     };
-	query(sender);
-	if(result_bluemix>=amount){
-		//alert("success!")
-
+	// query(sender);
+	// if(result_bluemix>=amount){
+		TRANS_COUNT = 0;
 		sendRequest(functionType.TRANSFER, jsonForSender);
 		sendRequest(functionType.TRANSFER, jsonForReceiver);
-		query(sender);
-	}
-	else{
-		alert("Fail! not enough balance.");
-	}
-
+	// }
+	// else{
+	// 	console.log("Fail! not enough balance.");
+	// }
 }
 
 function query(userName) {
@@ -207,6 +166,55 @@ function query(userName) {
     };
 	sendRequest(functionType.QUERY, json);
 }
+
+function sendRequest(type, inputJSON) {
+    $.ajax({
+        type: "POST",
+        //vp1
+        url: "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chaincode",
+        //vp0
+        //url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chaincode",
+        contentType: "application/json", 
+		async:false,
+        dataType: "json", //type of return value
+        data: JSON.stringify(inputJSON),
+        success: function (response,tag) {
+
+        	if(type == functionType.TRANSFER) { // to transfer
+        		console.log(JSON.stringify(response))
+        		TRANS_COUNT++;
+        		if(TRANS_COUNT==2){
+        			showLCD("transaction", "success")
+        		}
+
+        	} else if(type == functionType.QUERY) { // to query
+
+				result_bluemix = parseInt(response.result.message);
+        		//document.getElementById("amount_query").value = response.result.message;
+        		
+        		//console.log("name= "+ inputJSON.params.ctorMsg.args[0] + ",balance= " + response.result.message)
+				
+				if(UPDATEDASH_FLAG < NUM_USER){
+					createTable(inputJSON.params.ctorMsg.args[0], inputJSON.params.chaincodeID.name, response.result.message);
+					UPDATEDASH_FLAG++;
+				}
+
+        	} 
+        }
+    });
+}
+
+function showLCD(line1, line2){
+	 $.ajax({
+        type: "GET",
+        url: deviceInfo.DEVICE_PARKING+"lcd?line1="+line1+"&line2="+line2,
+        contentType: "application/json",
+        dataType: "json",
+        success: function (response,tag) {
+        }
+    });
+}
+
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
 function dropDownFunction(dropdownID) {
@@ -234,36 +242,33 @@ function setUserinDropdown(userID, funcName) {
 }
 
 
-
-function receiveRFID(response){
-	for (var i = response.length-1; i >=0 ; i--) {
-    	var currentTime = new Date(Date.parse(response[i].timestamp))
-    	//console.log(latestStoredRFID)
-    	if(currentTime > latestStoredRFID){//Success find new RFID
-    		latestStoredRFID = currentTime
-    		console.log("Update timestamp" + latestStoredRFID)
-    		transfer(response[i].cardUID, "parking", 10)
-    		
-    		//query(response[i].cardUID)
-
-    	}
+function updateDashboard(){
+	UPDATEDASH_FLAG = 0;
+	var table = document.getElementById("innerTable");
+	table.innerHTML = "";
+	for(var i = 0; i < userList.length; i++){
+		query(userList[i]);
 	}
+	query("carwash");
+	query("parking");
+	// query("toll");
+	// query("uber");
+	
 }
 
-function showLCD(userName, balance){
-	 $.ajax({
-        type: "GET",
-        url: deviceInfo.DEVICE_CARWASH+"lcd?line1="+userName+"&line2="+balance,
-        contentType: "application/json",
-        dataType: "json",
-        success: function (response,tag) {
-            console.log("success")
-        }
-    });
+function createTable(service, id, balance){
+	var table = document.getElementById("innerTable");
+	var row = table.insertRow();
+	var cell1 = row.insertCell(0);
+	var cell2 = row.insertCell(1);
+	var cell3 = row.insertCell(2);
+	cell1.innerHTML = service;
+	cell2.innerHTML = id;
+	cell3.innerHTML = balance;
 }
-/*
+
 function addUser(userName, amount) {
-	var json =
+	var inputJSON =
     {
         "jsonrpc": "2.0",
         "method": "invoke",
@@ -283,6 +288,19 @@ function addUser(userName, amount) {
         "id": 2
     };
 	
-	sendRequest(functionType.ADDUSER, json);
+	$.ajax({
+        type: "POST",
+        //vp1
+        url: "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chaincode",
+        //vp0
+        //url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chaincode",
+        contentType: "application/json", 
+		async:false,
+        dataType: "json", //type of return value
+        data: JSON.stringify(inputJSON),
+        success: function (response,tag) {
+
+        }
+    });
 }
-*/
+
