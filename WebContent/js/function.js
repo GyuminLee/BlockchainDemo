@@ -25,8 +25,8 @@ var userInfo = {
 }
 
 var deviceInfo = {
-		'DEVICE_PARKING' : "http://10.223.90.227:5000/rfid/",
-		'DEVICE_CARWASH' : "http://10.223.90.179:5000/rfid/"
+		'DEVICE_PARKING' : "http://10.223.90.227:5000/",
+		'DEVICE_CARWASH' : "http://10.223.90.99:5000/"
 }
 
 var priceInfo = {
@@ -161,10 +161,11 @@ function transfer(sender, receiver, amount) {
 	     };
 	query(sender);
 	if(result_bluemix>=amount){
-		alert("success!")
+		//alert("success!")
 
 		sendRequest(functionType.TRANSFER, jsonForSender);
 		sendRequest(functionType.TRANSFER, jsonForReceiver);
+		query(sender);
 	}
 	else{
 		alert("Fail! not enough balance.");
@@ -252,7 +253,7 @@ function receiveRFID(response){
 function showLCD(userName, balance){
 	 $.ajax({
         type: "GET",
-        url: "http://10.223.90.210:5000/lcd?line1="+userName+"&line2="+balance,
+        url: deviceInfo.DEVICE_CARWASH+"lcd?line1="+userName+"&line2="+balance,
         contentType: "application/json",
         dataType: "json",
         success: function (response,tag) {
