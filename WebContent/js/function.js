@@ -209,7 +209,7 @@ function query(userName) {
 }
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
-function myFunction(dropdownID) {
+function dropDownFunction(dropdownID) {
     document.getElementById(dropdownID).classList.toggle('show');
 }
 
