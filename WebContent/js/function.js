@@ -27,15 +27,6 @@ var priceInfo = {
 		'PRICE_CARWASH' : "50"
 }
 
-var urlInfo = {
-		//for query, transfer
-		'CHAINCODE' : "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chaincode",
-		//for block information
-		'BLOCK': "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chain/blocks/",
-		//for the number of blocks
-		'BLOCKNUMBER' : "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chain"
-}
-
 var userList = [
 	"car1",
 	"car2",
@@ -78,71 +69,6 @@ function receiveRFID(response){
     		transfer(response[i].cardUID, "parking", 10)
     	}
 	}
-	
-function getBlockNumber() {
-	$.ajax({
-        type: "GET",
-        //vp1
-        url: urlInfo.BLOCKNUMBER,
-        //vp0
-        //url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chaincode",
-        contentType: "application/json", //必须有
-		async:false,
-        success: function (response,tag) {
-        	console.log(response.height)
-        }
-    });
-}
-
-function getBlockInfo(blockNumber) {
-	$.ajax({
-        type: "GET",
-        //vp1
-        url: urlInfo.BLOCK + blockNumber,
-        //vp0
-        //url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chaincode",
-        contentType: "application/json", //必须有
-		async:false,
-        dataType: "json", //type of return value
-        data: JSON.stringify(inputJSON),
-        success: function (response,tag) {
-        	//TODO Decode transaction
-        	console.log(atob(response.transactions[0].payload))
-        }
-    });
-}
-
-function sendRequest(type, inputJSON) {
-    $.ajax({
-        type: "POST",
-        //vp1
-        url: "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chaincode",
-        //vp0
-        //url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chaincode",
-        contentType: "application/json", //必须有
-		async:false,
-        dataType: "json", //type of return value
-        data: JSON.stringify(inputJSON),
-        success: function (response,tag) {
-        	//TODO showing message of the result after get response
-        	if(type == functionType.TRANSFER) { // to transfer
-        		//console.log(JSON.stringify(response))
-        		showLCD(response.result.status, "Transfer success")
-        		//alert(response.result.status)
-        		//galert(JSON.stringify(response))
-        	} else if(type == functionType.QUERY) { // to query
-        		//alert(JSON.stringify(response))
-				result_bluemix = parseInt(response.result.message);
-				//alert(result_bluemix)
-        		document.getElementById("amount_query").value = response.result.message;
-        	//	console.log(inputJSON.params.ctorMsg.args[0])
-        		//console.log(response.result.message)
-        		showLCD(inputJSON.params.ctorMsg.args[0],response.result.message)
-        	} else if(type == functionType.ADDUSER) { // to add user
-        		//alert(response.result.status)
-        	}
-        }
-    });
 }
 
 function transfer(sender, receiver, amount) {
@@ -376,5 +302,4 @@ function addUser(userName, amount) {
 
         }
     });
-}
 }
