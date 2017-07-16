@@ -74,6 +74,15 @@
             updateDashboard();
           }, 10000);
           
+          
+          //Test code//////////////////////
+          //To get the number of blocks
+         sendGetRequest(functionType.BLOCKNUMBER, 0)
+          //To get block data
+         sendGetRequest(functionType.BLOCKDATA, 1)
+          /////////////////////////////////
+          
+          
           // window.setInterval(function(){
           //   checkNewData();
           // }, 3000);

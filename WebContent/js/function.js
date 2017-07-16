@@ -1,8 +1,10 @@
 
 var functionType = {
-	'TRANSFER'	: 1,
-	'QUERY'		: 2,
-	'ADDUSER'	: 3
+	'TRANSFER'		: 1,
+	'QUERY'			: 2,
+	'ADDUSER'		: 3,
+	'BLOCKDATA' 	: 4,
+	'BLOCKNUMBER' 	: 5
 }
 var chaincode = {
 		//car1, car2
@@ -39,6 +41,31 @@ var result_bluemix = -1;
 var UPDATEDASH_FLAG = 0;
 var NUM_USER = 2 + userList.length;
 var TRANS_COUNT = 0;
+
+
+function sendGetRequest(type, blockNumber) {//To get the number of blocks , input 0 at blocknumber
+	var url = "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chain"
+	if(type == functionType.BLOCKDATA) {
+			url = "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chain/blocks/" + blockNumber
+		}
+	 $.ajax({
+	        type: "GET",
+	        url: url,
+	        contentType: "application/json",
+	        async: false,
+	        dataType: "json", //type of return value
+	        
+	        success: function (response,tag) {
+	            //TODO Decode transaction
+	        	if(type == functionType.BLOCKDATA) {
+	        		console.log("blockNumber : " + blockNumber)
+	        		console.log(atob(response.transactions[0].payload))
+	        	} else if(type == functionType.BLOCKNUMBER)
+	        		console.log("The number of blocks : " + response.height)
+	        }
+	    });
+}
+
 
 function checkNewData() {
 	Object.keys(deviceInfo).forEach(function(key,index) {
