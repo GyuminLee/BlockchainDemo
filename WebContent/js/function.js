@@ -27,6 +27,15 @@ var priceInfo = {
 		'PRICE_CARWASH' : "50"
 }
 
+var urlInfo = {
+		//for query, transfer
+		'CHAINCODE' : "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chaincode",
+		//for block information
+		'BLOCK': "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chain/blocks/",
+		//for the number of blocks
+		'BLOCKNUMBER' : "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chain"
+}
+
 var userList = [
 	"car1",
 	"car2",
@@ -74,7 +83,7 @@ function getBlockNumber() {
 	$.ajax({
         type: "GET",
         //vp1
-        url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chain",
+        url: urlInfo.BLOCKNUMBER,
         //vp0
         //url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chaincode",
         contentType: "application/json", //必须有
@@ -89,7 +98,7 @@ function getBlockInfo(blockNumber) {
 	$.ajax({
         type: "GET",
         //vp1
-        url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chain/blocks/" + blockNumber,
+        url: urlInfo.BLOCK + blockNumber,
         //vp0
         //url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chaincode",
         contentType: "application/json", //必须有
@@ -98,8 +107,7 @@ function getBlockInfo(blockNumber) {
         data: JSON.stringify(inputJSON),
         success: function (response,tag) {
         	//TODO Decode transaction
-        	
-        	console.log(atob(response.result.transactions.payload))
+        	console.log(atob(response.transactions[0].payload))
         }
     });
 }
