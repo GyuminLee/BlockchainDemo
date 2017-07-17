@@ -41,12 +41,13 @@ var result_bluemix = -1;
 var UPDATEDASH_FLAG = 0;
 var NUM_USER = 2 + userList.length;
 var TRANS_COUNT = 0;
+var BLOCKS_LENGTH = 0;
 
 
 function sendGetRequest(type, blockNumber) {//To get the number of blocks , input 0 at blocknumber
-	var url = "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chain"
+	var url = "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chain"
 	if(type == functionType.BLOCKDATA) {
-			url = "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chain/blocks/" + blockNumber
+			url = "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chain/blocks/" + blockNumber
 		}
 	 $.ajax({
 	        type: "GET",
@@ -59,9 +60,14 @@ function sendGetRequest(type, blockNumber) {//To get the number of blocks , inpu
 	            //TODO Decode transaction
 	        	if(type == functionType.BLOCKDATA) {
 	        		console.log("blockNumber : " + blockNumber)
-	        		console.log(atob(response.transactions[0].payload))
-	        	} else if(type == functionType.BLOCKNUMBER)
+	        		for(i = 0; i < response.transactions.length; i++) {
+	        			console.log(atob(response.transactions[i].payload))
+	        		}
+	        		
+	        	} else if(type == functionType.BLOCKNUMBER) {
 	        		console.log("The number of blocks : " + response.height)
+	        		BLOCKS_LENGTH = response.height
+	        	}
 	        }
 	    });
 }
