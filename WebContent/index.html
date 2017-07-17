@@ -73,23 +73,6 @@
           window.setInterval(function(){
             updateDashboard();
           }, 10000);
-          
-       
-          
-          //Test code//////////////////////
-          //To get the number of blocks
-          
-        	sendGetRequest(functionType.BLOCKNUMBER, 0)
-        	for(i = BLOCKS_LENGTH - 10; i < BLOCKS_LENGTH; i++) {
-            	sendGetRequest(functionType.BLOCKDATA, i)
-            }
-       
-          /////////////////////////////////
-          
-          
-          // window.setInterval(function(){
-          //   checkNewData();
-          // }, 3000);
         });
   </script> 
 

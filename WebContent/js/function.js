@@ -55,16 +55,19 @@ function sendGetRequest(type, blockNumber) {//To get the number of blocks , inpu
 	        contentType: "application/json",
 	        async: false,
 	        dataType: "json", //type of return value
-	        
 	        success: function (response,tag) {
-	            //TODO Decode transaction
-	        	if(type == functionType.BLOCKDATA) {
+	        	if(type == functionType.BLOCKDATA) { // GET Block data
 	        		console.log("blockNumber : " + blockNumber)
 	        		for(j = 0; j < response.transactions.length; j++) {
-	        			console.log(atob(response.transactions[j].payload))
+	        			var payload = atob(response.transactions[j].payload)
+	        			console.log("payload : " + payload.substr(140, payload.length))
+	        			//0~140 : Chaincode ID
+	        			console.log("txid : " + response.transactions[j].txid)
+	        			var date = new Date(1000 * response.transactions[j].timestamp.seconds)
+	        			console.log("timestamp : " + date)
+	        			console.log("Chaincode ID : " + atob(response.transactions[j].chaincodeID))
 	        		}
-	        		
-	        	} else if(type == functionType.BLOCKNUMBER) {
+	        	} else if(type == functionType.BLOCKNUMBER) { // GET Blocks length
 	        		console.log("The number of blocks : " + response.height)
 	        		BLOCKS_LENGTH = response.height
 	        	}
@@ -274,6 +277,13 @@ function setUserinDropdown(userID, funcName) {
 	document.getElementById(funcName).innerHTML =userID;
 }
 
+function updateBlockInfo(){
+	sendGetRequest(functionType.BLOCKNUMBER, 0)
+	for(i = BLOCKS_LENGTH - 10; i < BLOCKS_LENGTH; i++) {
+    	sendGetRequest(functionType.BLOCKDATA, i)
+    	
+    }
+}
 
 function updateDashboard(){
 	UPDATEDASH_FLAG = 0;
@@ -325,8 +335,6 @@ function addUser(userName, amount) {
         type: "POST",
         //vp1
         url: "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chaincode",
-        //vp0
-        //url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chaincode",
         contentType: "application/json", 
 		async:false,
         dataType: "json", //type of return value
