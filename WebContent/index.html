@@ -68,12 +68,12 @@
     </div>
 
    <script>
-        $(document).ready(function(){
+      $(document).ready(function(){
+        updateDashboard();
+        window.setInterval(function(){
           updateDashboard();
-          window.setInterval(function(){
-            updateDashboard();
-          }, 10000);
-        });
+        }, 10000);
+      });
   </script> 
 
 

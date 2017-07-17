@@ -43,39 +43,6 @@ var NUM_USER = 2 + userList.length;
 var TRANS_COUNT = 0;
 var BLOCKS_LENGTH = 0;
 
-
-function sendGetRequest(type, blockNumber) {//To get the number of blocks , input 0 at blocknumber
-	var url = "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chain"
-	if(type == functionType.BLOCKDATA) {
-			url = "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chain/blocks/" + blockNumber
-		}
-	 $.ajax({
-	        type: "GET",
-	        url: url,
-	        contentType: "application/json",
-	        async: false,
-	        dataType: "json", //type of return value
-	        success: function (response,tag) {
-	        	if(type == functionType.BLOCKDATA) { // GET Block data
-	        		console.log("blockNumber : " + blockNumber)
-	        		for(j = 0; j < response.transactions.length; j++) {
-	        			var payload = atob(response.transactions[j].payload)
-	        			console.log("payload : " + payload.substr(141, payload.length))
-	        			//0~141 : Chaincode ID
-	        			console.log("txid : " + response.transactions[j].txid)
-	        			var date = new Date(1000 * response.transactions[j].timestamp.seconds)
-	        			console.log("timestamp : " + date)
-	        			console.log("Chaincode ID : " + atob(response.transactions[j].chaincodeID))
-	        		}
-	        	} else if(type == functionType.BLOCKNUMBER) { // GET Blocks length
-	        		console.log("The number of blocks : " + response.height)
-	        		BLOCKS_LENGTH = response.height
-	        	}
-	        }
-	    });
-}
-
-
 function checkNewData() {
 	Object.keys(deviceInfo).forEach(function(key,index) {
 
@@ -278,11 +245,57 @@ function setUserinDropdown(userID, funcName) {
 }
 
 function updateBlockInfo(){
+	var panelDiv = document.getElementById("panelDiv")
+	panelDiv.innerHTML = "";
+
 	sendGetRequest(functionType.BLOCKNUMBER, 0)
-	for(i = BLOCKS_LENGTH - 10; i < BLOCKS_LENGTH; i++) {
-    	sendGetRequest(functionType.BLOCKDATA, i)
-    	
+	for(i = BLOCKS_LENGTH-1; i >= BLOCKS_LENGTH-10; i--) {
+    	sendGetRequest(functionType.BLOCKDATA, i)  	
     }
+}
+
+function sendGetRequest(type, blockNumber) {//To get the number of blocks , input 0 at blocknumber
+	var url = "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chain"
+	if(type == functionType.BLOCKDATA) {
+			url = "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chain/blocks/" + blockNumber
+		}
+	 $.ajax({
+	        type: "GET",
+	        url: url,
+	        contentType: "application/json",
+	        async: false,
+	        dataType: "json", //type of return value
+	        success: function (response,tag) {
+	        	if(type == functionType.BLOCKDATA) { // GET Block data
+	        		//console.log("blockid: " + blockNumber)
+	        		createBlock(blockNumber, response.transactions)
+
+	        	} else if(type == functionType.BLOCKNUMBER) { // GET Blocks length
+	        		//console.log("The number of blocks : " + response.height)
+	        		BLOCKS_LENGTH = response.height
+	        	}
+	        }
+	    });
+}
+
+function createBlock(blockid, transactionData){
+	var panelDiv = document.getElementById("panelDiv")
+	var html = panelDiv.innerHTML;
+	html += '<div class="panel panel-info panel-custom"><div class="panel-heading">'+blockid+ '</div><div class="panel-body">';
+
+	for(j = 0; j < transactionData.length; j++) {
+		//0~141 : Chaincode ID
+		var payload = atob(transactionData[j].payload)
+		var date = new Date(1000 * transactionData[j].timestamp.seconds)
+		html += "<p>";
+		html += date + "<br>";
+		html += transactionData[j].txid + "<br>";
+		html += atob(transactionData[j].chaincodeID) + "<br>";
+		html += payload.substr(141, payload.length) + "<br>";
+		html += "</p>";
+	}
+	html += "</div></div>";
+	panelDiv.innerHTML = html;
 }
 
 function updateDashboard(){

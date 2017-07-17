@@ -48,34 +48,25 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Block</h1>
+          <h1 class="page-header">Block Information</h1>
 
           <!-- TODO : -->
           <div id="panelDiv">
-            <div class="panel panel-info panel-custom">
-              <div class="panel-heading"
-              		id="blockHead1">
-                BlockID
-              </div>
-              <div class="panel-body">
-                <p>TransactionID</p>
-                <p>Timestamp</p>
-                <p>ChaincodeID</p>
-                <p>Payload</p>
-              </div>
-            </div>
             <div class="panel panel-info panel-custom">
               <div class="panel-heading">
                 BlockID
               </div>
               <div class="panel-body">
-                <p>TransactionID</p>
-                <p>Timestamp</p>
-                <p>ChaincodeID</p>
-                <p>Payload</p>
+                <p>Timestamp<br>
+                TransactionID<br>
+                ChaincodeID<br>
+                Payload</p>
+                <p>Timestamp<br>
+                TransactionID<br>
+                ChaincodeID<br>
+                Payload</p>
               </div>
             </div>
-
 
           </div>
         </div>
@@ -83,9 +74,12 @@
     </div>
 
    <script>
-        $(document).ready(function(){
-       		updateBlockInfo(); 	
-        });
+     $(document).ready(function(){
+        updateBlockInfo();
+        window.setInterval(function(){
+          updateBlockInfo()
+        }, 10000);
+      });
   </script> 
 
 
