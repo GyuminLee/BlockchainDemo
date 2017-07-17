@@ -60,8 +60,8 @@ function sendGetRequest(type, blockNumber) {//To get the number of blocks , inpu
 	        		console.log("blockNumber : " + blockNumber)
 	        		for(j = 0; j < response.transactions.length; j++) {
 	        			var payload = atob(response.transactions[j].payload)
-	        			console.log("payload : " + payload.substr(140, payload.length))
-	        			//0~140 : Chaincode ID
+	        			console.log("payload : " + payload.substr(141, payload.length))
+	        			//0~141 : Chaincode ID
 	        			console.log("txid : " + response.transactions[j].txid)
 	        			var date = new Date(1000 * response.transactions[j].timestamp.seconds)
 	        			console.log("timestamp : " + date)
