@@ -60,8 +60,8 @@ function sendGetRequest(type, blockNumber) {//To get the number of blocks , inpu
 	            //TODO Decode transaction
 	        	if(type == functionType.BLOCKDATA) {
 	        		console.log("blockNumber : " + blockNumber)
-	        		for(i = 0; i < response.transactions.length; i++) {
-	        			console.log(atob(response.transactions[i].payload))
+	        		for(j = 0; j < response.transactions.length; j++) {
+	        			console.log(atob(response.transactions[j].payload))
 	        		}
 	        		
 	        	} else if(type == functionType.BLOCKNUMBER) {
