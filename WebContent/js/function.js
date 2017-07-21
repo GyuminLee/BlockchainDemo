@@ -136,7 +136,6 @@ function transfer(sender, receiver, amount) {
 }
 
 function query(userName) {
-
 	var chaincodeID = chaincode.USER;
 	if(userName == "parking") {
 		chaincodeID = chaincode.PARKING;
@@ -294,6 +293,18 @@ function createBlock(blockid, transactionData){
 	html += "</div></div>";
 	panelDiv.innerHTML = html;
 }
+
+/*
+function addDropdown(userList, funcName, funcId) {
+	var dropDownMenu = document.getElementById(funcId)
+	var html = dropDownMenu.innerHTML;
+	
+	for(var i = 0; i < userList.length; i++) {
+		html += "<li><a onclick=";
+		html += setUserinDropdown('car1','name_func1')">car1</a></li>
+	}
+}*/
+
 
 function updateDashboard(){
 	UPDATEDASH_FLAG = 0;

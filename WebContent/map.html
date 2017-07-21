@@ -81,43 +81,43 @@
 		<img src="img/map.jpg" alt="Map" id="image_map"
 			style="position: absolute; left: 270px; top: 20px">
 	</div>
-
-	<!--func1_Parking-->
-	<a href="JavaScript:void(0)"
-		style="position: absolute; left: 400px; top: 120px"
-		onclick="document.getElementById('func1_on').style.display='block';document.getElementById('func1_off').style.display='block'">
-		Parking Service</a>
-
+	<!--Parking-->
+	<button style="position: absolute; left: 400px; top: 120px" 
+	type="button" class="btn btn-warning"
+	onclick="document.getElementById('func1_on').style.display='block';document.getElementById('func1_off').style.display='block'">
+	Parking Service</button>
+	
 	<!--func2_Washing-->
-	<a href="JavaScript:void(0)"
+	<button type="button" class="btn btn-warning"
 		style="position: absolute; left: 630px; top: 120px"
 		onclick="document.getElementById('func2_on').style.display='block';document.getElementById('func2_off').style.display='block'">
-		Washing Service</a>
-
+		Washing Service</button>
+	
 	<!--func3_Toll-->
-	<a href="JavaScript:void(0)"
+	
+	<button type="button" class="btn btn-warning"
 		style="position: absolute; left: 850px; top: 120px"
 		onclick="document.getElementById('func3_on').style.display='block';document.getElementById('func3_off').style.display='block'">
-		Toll Service</a>
-
+		Toll Service</button>
+	
 	<!-- func4_Uber -->
-	<a href="JavaScript:void(0)"
+	<button type="button" class="btn btn-warning"
 		style="position: absolute; left: 650px; top: 300px"
 		onclick="document.getElementById('func4_on').style.display='block';document.getElementById('func4_off').style.display='block'">
-		Uber Service</a>
-
-	<!--func_query-->
-	<a href="JavaScript:void(0)"
-		style="position: absolute; left: 130px; top: 80px"
-		onclick="document.getElementById('funcq_on').style.display='block';document.getElementById('funcq_off').style.display='block'">
-		Query</a>
-
-	<!--func_transfer-->
-	<a href="JavaScript:void(0)"
+		Uber Service</button>
+	
+	<!--func_query
+		<button type="button" class="btn btn-warning"
 		style="position: absolute; left: 130px; top: 100px"
+		onclick="document.getElementById('funcq_on').style.display='block';document.getElementById('funcq_off').style.display='block'">
+		Query</button>
+	-->
+	<!--func_transfer-->
+		<button type="button" class="btn btn-warning"
+		style="position: absolute; left: 130px; top: 120px"
 		onclick="document.getElementById('functrans_on').style.display='block';document.getElementById('functrans_off').style.display='block'">
-		Transfer</a>
-	        </div>
+		Transfer</button>
+	    </div>
       </div>
     </div>
 
@@ -126,11 +126,11 @@
 		<h2>Parking</h2>
 		Name:
 		<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <button class="btn btn-default dropdown-toggle" type="button" id="name_func1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     Dropdown
     <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+  <ul id="func1Dropdown" class="dropdown-menu" aria-labelledby="dropdownMenu1">
     <li><a onclick="setUserinDropdown('car1','name_func1')">car1</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
