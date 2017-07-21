@@ -20,8 +20,8 @@ var userInfo = {
 }
 
 var deviceInfo = {
-		'DEVICE_PARKING' : "http://10.223.116.21:5000/"
-		//'DEVICE_CARWASH' : "http://10.223.90.99:5000/"
+		'DEVICE_PARKING' : "http://10.223.116.21:5000/",
+		'DEVICE_CARWASH' : "http://10.223.116.20:5000/"
 }
 
 var priceInfo = {
@@ -48,7 +48,7 @@ function checkNewData() {
 
 	    $.ajax({
 			type: "GET",
-			url: deviceInfo[key] + "rfid",
+			url: deviceInfo[key] + "rfid/",
 			contentType: "application/json",
 			dataType: "json",
 			success: function (response,tag) {
@@ -294,16 +294,16 @@ function createBlock(blockid, transactionData){
 	panelDiv.innerHTML = html;
 }
 
-/*
-function addDropdown(userList, funcName, funcId) {
-	var dropDownMenu = document.getElementById(funcId)
+
+function addDropdown() {
+	var dropDownMenu = document.getElementById("func1Dropdown")
 	var html = dropDownMenu.innerHTML;
 	
 	for(var i = 0; i < userList.length; i++) {
-		html += "<li><a onclick=";
-		html += setUserinDropdown('car1','name_func1')">car1</a></li>
+		console.log()
+		html += "<li><a onclick=\"setUserinDropdown("+userList.i +"','name_func" + (i+1) +"')\">" +userList.i+ "</a></li>"
 	}
-}*/
+}
 
 
 function updateDashboard(){
