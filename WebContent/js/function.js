@@ -20,7 +20,7 @@ var userInfo = {
 }
 
 var deviceInfo = {
-		'DEVICE_PARKING' : "http://10.223.90.210:5000/"
+		'DEVICE_PARKING' : "http://10.223.116.21:5000/"
 		//'DEVICE_CARWASH' : "http://10.223.90.99:5000/"
 }
 
@@ -36,7 +36,7 @@ var userList = [
 	"car4"
 ]
 
-var latestStoredRFID = new Date(2017,5,22);
+var latestStoredRFID = new Date();
 var result_bluemix = -1;
 var UPDATEDASH_FLAG = 0;
 var NUM_USER = 2 + userList.length;
