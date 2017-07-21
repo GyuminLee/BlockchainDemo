@@ -69,13 +69,13 @@
 
    <script>
       $(document).ready(function(){
-        updateDashboard();
+        // updateDashboard();
+
+        // window.setInterval(function(){
+        //   updateDashboard();
+        // }, 10000);
+
         checkNewData();
-
-        window.setInterval(function(){
-          updateDashboard();
-        }, 10000);
-
         window.setInterval(function(){
           checkNewData();
         }, 3000);
