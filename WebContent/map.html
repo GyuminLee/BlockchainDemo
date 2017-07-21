@@ -163,12 +163,18 @@
 		<h2>Washing</h2>
 		Name:
 		<div class="dropdown">
-			<button onclick="dropDownFunction('func2Dropdown')" class="dropbtn" id="name_func2">Name</button>
-			<div id="func2Dropdown" class="dropdown-content">
-				<a onclick="setUserinDropdown('car1','name_func2')">car1</a>
-				<a onclick="setUserinDropdown('car2','name_func2')">car2</a>
-			</div>
-		</div>
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Dropdown
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>
 		<br> Payment:<br> <input type="text" id="amount_func2"><br>
 		<button id="button_func2">Pay</button>
 		<button

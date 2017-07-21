@@ -20,7 +20,7 @@ var userInfo = {
 }
 
 var deviceInfo = {
-		'DEVICE_PARKING' : "http://10.223.116.21:5000/"
+		'DEVICE_PARKING' : "https://10.223.116.21:5000/"
 		//'DEVICE_CARWASH' : "http://10.223.90.99:5000/"
 }
 
@@ -52,6 +52,7 @@ function checkNewData() {
 			contentType: "application/json",
 			dataType: "json",
 			success: function (response,tag) {
+				console.log(response)
 				receiveRFID(response)
 			}
 		});
@@ -62,7 +63,7 @@ function checkNewData() {
 function receiveRFID(response){
 	for (var i = response.length-1; i >=0 ; i--) {
     	var currentTime = new Date(Date.parse(response[i].timestamp))
-    	//console.log(latestStoredRFID)
+    	console.log(currentTime)
     	
     	if(currentTime > latestStoredRFID){
     	//Success find new RFID
