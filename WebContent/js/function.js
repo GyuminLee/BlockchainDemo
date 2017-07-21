@@ -173,10 +173,7 @@ function query(userName) {
 function sendRequest(type, inputJSON) {
     $.ajax({
         type: "POST",
-        //vp1
         url: "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chaincode",
-        //vp0
-        //url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chaincode",
         contentType: "application/json", 
 		async:false,
         dataType: "json", //type of return value
