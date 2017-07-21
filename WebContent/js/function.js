@@ -137,7 +137,6 @@ function transfer(sender, receiver, amount) {
 }
 
 function query(userName) {
-
 	var chaincodeID = chaincode.USER;
 	if(userName == "parking") {
 		chaincodeID = chaincode.PARKING;
@@ -174,10 +173,7 @@ function query(userName) {
 function sendRequest(type, inputJSON) {
     $.ajax({
         type: "POST",
-        //vp1
         url: "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chaincode",
-        //vp0
-        //url: "https://6128a651373e479f968b58f35ea9b7cb-vp0.us.blockchain.ibm.com:5001/chaincode",
         contentType: "application/json", 
 		async:false,
         dataType: "json", //type of return value
@@ -298,6 +294,18 @@ function createBlock(blockid, transactionData){
 	html += "</div></div>";
 	panelDiv.innerHTML = html;
 }
+
+/*
+function addDropdown(userList, funcName, funcId) {
+	var dropDownMenu = document.getElementById(funcId)
+	var html = dropDownMenu.innerHTML;
+	
+	for(var i = 0; i < userList.length; i++) {
+		html += "<li><a onclick=";
+		html += setUserinDropdown('car1','name_func1')">car1</a></li>
+	}
+}*/
+
 
 function updateDashboard(){
 	UPDATEDASH_FLAG = 0;
