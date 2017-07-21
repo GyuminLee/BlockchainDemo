@@ -126,12 +126,24 @@
 		<h2>Parking</h2>
 		Name:
 		<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Dropdown
+    <span class="caret"></span>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <a onclick="setUserinDropdown('car1','name_func1')">car1</a>
+    <a onclick="setUserinDropdown('car2','name_func1')">car2</a>
+  </div>
+</div>
+		
+<!--  <div class="dropdown">
 			<button onclick="dropDownFunction('func1Dropdown')" class="dropbtn" id="name_func1">Name</button>
 			<div id="func1Dropdown" class="dropdown-content">
 				<a onclick="setUserinDropdown('car1','name_func1')">car1</a>
 				<a onclick="setUserinDropdown('car2','name_func1')">car2</a>
 			</div>
 		</div>
+		-->
 		<br>
 		Payment:<br> <input type="text" id="amount_func1"><br>
 		<button id="button_func1">Pay</button>
@@ -139,6 +151,7 @@
 				onclick="document.getElementById('func1_on').style.display='none';document.getElementById('func1_off').style.display='none'">
 			Close</button>
 	</div>
+
 	<div id="func1_off" class="black_overlay"></div>
 	<!--Uber Pop-up-->
 	<div id="func4_on" class="white_content">
