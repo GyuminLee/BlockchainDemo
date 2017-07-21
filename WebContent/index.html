@@ -70,9 +70,15 @@
    <script>
       $(document).ready(function(){
         updateDashboard();
+        checkNewData();
+
         window.setInterval(function(){
           updateDashboard();
         }, 10000);
+
+        window.setInterval(function(){
+          checkNewData();
+        }, 3000);
       });
   </script> 
 
