@@ -36,7 +36,7 @@ var userList = [
 	"car4"
 ]
 
-var latestStoredRFID = new Date();
+var latestStoredRFID = new Date(2017,6,1);
 var result_bluemix = -1;
 var UPDATEDASH_FLAG = 0;
 var NUM_USER = 2 + userList.length;
@@ -52,7 +52,11 @@ function checkNewData() {
 			contentType: "application/json",
 			dataType: "json",
 			success: function (response,tag) {
+				//console.log(response)
 				receiveRFID(response)
+			},
+			error: function (response,tag) {
+				console.log(response)
 			}
 		});
 	});
@@ -62,8 +66,8 @@ function checkNewData() {
 function receiveRFID(response){
 	for (var i = response.length-1; i >=0 ; i--) {
     	var currentTime = new Date(Date.parse(response[i].timestamp))
-    	//console.log(latestStoredRFID)
-    	
+    	// console.log(latestStoredRFID)
+    	// console.log(currentTime)
     	if(currentTime > latestStoredRFID){
     	//Success find new RFID
     		latestStoredRFID = currentTime
