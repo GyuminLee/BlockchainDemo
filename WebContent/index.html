@@ -41,7 +41,7 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="index.html">Dashboard </a></li>
-            <li><a href="parking.html">Parking Service</a></li>
+            <!-- <li><a href="parking.html">Toll Service</a></li> -->
             <li><a href="map.html">Cute Map</a></li>
             <li><a href="visual_block.html">Visual Block</a></li>
           </ul>
@@ -69,16 +69,15 @@
 
    <script>
       $(document).ready(function(){
-         updateDashboard();
-
-         window.setInterval(function(){
-           updateDashboard();
-         }, 10000);
-
-        checkNewData();
+        updateDashboard();
         window.setInterval(function(){
-          checkNewData();
-        }, 3000);
+          updateDashboard();
+        }, 10000);
+
+        // checkNewData();
+        // window.setInterval(function(){
+        //   checkNewData();
+        // }, 3000);
       });
   </script> 
 

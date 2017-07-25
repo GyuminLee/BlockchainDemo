@@ -42,16 +42,16 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li><a href="index.html">Dashboard </a></li>
-            <li><a href="parking.html">Parking Service</a></li>
+            <!-- <li><a href="parking.html">Toll Service</a></li> -->
             <li><a href="map.html">Cute Map</a></li>
             <li class="active"><a href="visual_block.html">Visual Block</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Block Information</h1>
-
-          <!-- TODO : -->
-          <div id="panelDiv">
+          <div id="loader"></div>
+          
+          <div style="display:none;" id="panelDiv">
             <div class="panel panel-info panel-custom">
               <div class="panel-heading">
                 BlockID
@@ -75,7 +75,8 @@
 
    <script>
      $(document).ready(function(){
-        updateBlockInfo();
+        
+        updateBlockInfo()
         window.setInterval(function(){
           updateBlockInfo()
         }, 10000);

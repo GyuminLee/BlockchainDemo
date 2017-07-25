@@ -2,85 +2,87 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-    <title>Smart Vehicle Service</title>
+	<title>Smart Vehicle Service</title>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    <!-- Custom styles for this template -->
-    <link href="css/dashboard.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+	<!-- Custom styles for this template -->
+	<link href="css/dashboard.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/function.js"> </script>
-    
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/function.js"> </script>
+
 	<script>
-        $(document).ready(function(){
-            
-            $("button#button_func1").click(function(){
-            	transfer(document.getElementById("name_func1").value, "parking", document.getElementById("amount_func1").value)
-            });
-            $("button#button_func2").click(function(){
-            	transfer(document.getElementById("name_func2").value, "carwash", document.getElementById("amount_func2").value)
-		   });
-            $("button#button_func3").click(function(){
-            	transfer(document.getElementById("name_func3").value, "toll", document.getElementById("amount_func3").value)
-		   });
-            $("button#button_func4").click(function(){
-//				alert(document.getElementById("dropdown_list").options[document.getElementById("dropdown_list").selectedIndex].value);
-//				alert(document.getElementById("name_func4").value);
+		$(document).ready(function(){
 
-				transfer(document.getElementById("dropdown_list").options[document.getElementById("dropdown_list").selectedIndex].value, "uber", document.getElementById("amount_func4").value)
-		   });
-            $("button#button_query").click(function(){
-				query(document.getElementById("name_query").value);
-            });
-            $("button#button_transfer").click(function(){
-                transfer(document.getElementById("name_trans_from").value,document.getElementById("name_trans_to").value,document.getElementById("amount_transfer").value)
-            });
-            $("button#button_adduser").click(function(){
+			$("button#button_func1").click(function(){
+				transfer(document.getElementById("dropdown_list_parking").options[document.getElementById("dropdown_list_parking").selectedIndex].value, "parking", document.getElementById("amount_func1").value)
+			});
+			$("button#button_func2").click(function(){
+				transfer(document.getElementById("dropdown_list_washing").options[document.getElementById("dropdown_list_washing").selectedIndex].value, "carwash", document.getElementById("amount_func2").value)
+
+			});
+			$("button#button_func3").click(function(){
+				transfer(document.getElementById("dropdown_list_toll").options[document.getElementById("dropdown_list_toll").selectedIndex].value, "toll", document.getElementById("amount_func3").value)
+			});
+			$("button#button_func4").click(function(){
+				transfer(document.getElementById("dropdown_list_uber").options[document.getElementById("dropdown_list_uber").selectedIndex].value, "uber", document.getElementById("amount_func4").value)
+			});
+			$("button#button_query").click(function(){
+				query(document.getElementById("dropdown_list_query").options[document.getElementById("dropdown_list_query").selectedIndex].value);
+			});
+			$("button#button_transfer").click(function(){
+				transfer(document.getElementById("dropdown_list_transfer_from").options[document.getElementById("dropdown_list_transfer_from").selectedIndex].value, document.getElementById("dropdown_list_transfer_to").options[document.getElementById("dropdown_list_transfer_to").selectedIndex].value, document.getElementById("amount_transfer").value)
+			});
+			$("button#button_deposit").click(function(){
+				deposit(document.getElementById("dropdown_list_deposit").options[document.getElementById("dropdown_list_deposit").selectedIndex].value, document.getElementById("amount_deposit").value)
+			});
+			$("button#button_adduser").click(function(){
 				addUser(document.getElementById("name_adduser").value, document.getElementById("amount_adduser").value)
-            });
-        });
-            
+			});
+
+		});
 	</script>
 </head>
 
 <body>
 
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="index.html">Smart Vehicle Service</a>
-        </div>
-      </div>
-    </nav>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="index.html">Smart Vehicle Service</a>
+		</div>
+	</div>
+</nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li><a href="index.html">Dashboard</a></li>
-            <li><a href="parking.html">Parking Service</a></li>
-            <li  class="active"><a href="map.html">Cute Map</a></li>
-            <li><a href="visual_block.html">Visual Block</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Cute Map</h1>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-3 col-md-2 sidebar">
+			<ul class="nav nav-sidebar">
+				<li><a href="index.html">Dashboard</a></li>
+				<!-- <li><a href="parking.html">Toll Service</a></li> -->
+				<li  class="active"><a href="map.html">Cute Map</a></li>
+				<li><a href="visual_block.html">Visual Block</a></li>
+			</ul>
+		</div>
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<h1 class="page-header">Cute Map</h1>
 
 
+<<<<<<< HEAD
 	<div id="main" align="center">
 		<img src="img/map.jpg" alt="Map" id="image_map"
 			style="position: absolute; left: 270px; top: 20px">
@@ -143,136 +145,203 @@
 			<div id="func1Dropdown" class="dropdown-content">
 				<a onclick="setUserinDropdown('car1','name_func1')">car1</a>
 				<a onclick="setUserinDropdown('car2','name_func1')">car2</a>
+=======
+			<div id="main" align="center">
+				<img src="img/map.jpg" alt="Map" id="image_map"
+					 style="position: absolute; left: 270px; top: 20px">
+>>>>>>> b8799ac176664ae48f826396aacc1b8669d06960
 			</div>
+			<!--Parking-->
+			<button style="position: absolute; left: 400px; top: 120px"
+					type="button" class="btn btn-warning"
+					onclick="document.getElementById('func1_on').style.display='block';document.getElementById('func1_off').style.display='block'">
+				Parking Service</button>
+
+			<!--func2_Washing-->
+			<button type="button" class="btn btn-warning"
+					style="position: absolute; left: 630px; top: 120px"
+					onclick="document.getElementById('func2_on').style.display='block';document.getElementById('func2_off').style.display='block'">
+				Washing Service</button>
+
+			<!--func3_Toll-->
+
+			<button type="button" class="btn btn-warning"
+					style="position: absolute; left: 850px; top: 120px"
+					onclick="document.getElementById('func3_on').style.display='block';document.getElementById('func3_off').style.display='block'">
+				Toll Service</button>
+
+			<!-- func4_Uber -->
+			<button type="button" class="btn btn-warning"
+					style="position: absolute; left: 650px; top: 300px"
+					onclick="document.getElementById('func4_on').style.display='block';document.getElementById('func4_off').style.display='block'">
+				Uber Service</button>
+
+			<!--func_query -->
+                <button type="button" class="btn btn-warning"
+                style="position: absolute; left: 130px; top: 80px"
+                onclick="document.getElementById('funcq_on').style.display='block';document.getElementById('funcq_off').style.display='block'">
+                Query</button>
+
+			<!--func_transfer-->
+			<button type="button" class="btn btn-warning"
+					style="position: absolute; left: 130px; top: 130px"
+					onclick="document.getElementById('functrans_on').style.display='block';document.getElementById('functrans_off').style.display='block'">
+				Transfer</button>
+			<!--func3_Deposit-->
+
+			<button type="button" class="btn btn-warning"
+					style="position: absolute; left: 130px; top: 180px"
+					onclick="document.getElementById('funcDeposit_on').style.display='block';document.getElementById('funcDeposit_off').style.display='block'">
+				Deposit</button>
 		</div>
-		-->
-		<br>
-		Payment:<br> <input type="text" id="amount_func1"><br>
-		<button id="button_func1">Pay</button>
-		<button
-				onclick="document.getElementById('func1_on').style.display='none';document.getElementById('func1_off').style.display='none'">
-			Close</button>
 	</div>
-
-	<div id="func1_off" class="black_overlay"></div>
-	<!--Uber Pop-up-->
-	<div id="func4_on" class="white_content">
-		<h2>Uber</h2>
-		Name:
-		<select id="dropdown_list">
-
-			<script>
-				for(i=0;i<NUM_USER;i++){
-					document.getElementById("dropdown_list").options.add(new Option(userList[i],userList[i]));
-				}
-//				alert(document.getElementById("dropdown_list").options[document.getElementById("dropdown_list").selectedIndex].value);
-			</script>
-		</select>
-		<!--<div class="dropdown">-->
-			<!--<button onclick="dropDownFunction('func4Dropdown')"  class="dropbtn" id="name_func4">Name</button>-->
-			<!--<div id="func4Dropdown" class="dropdown-content">-->
-				<!--<a onclick="setUserinDropdown('car1','name_func4')">car1</a>-->
-				<!--<a onclick="setUserinDropdown('car2','name_func4')">car2</a>-->
-			<!--</div>-->
-		<!--</div>-->
-		<br> Payment:<br> <input type="text" id="amount_func4"><br>
-		<button id="button_func4">Pay</button>
-		<button
-				onclick="document.getElementById('func4_on').style.display='none';document.getElementById('func4_off').style.display='none'">
-			Close</button>
-	</div>
-	<div id="func4_off" class="black_overlay"></div>
-	<!--Washing Pop-up-->
-	<div id="func2_on" class="white_content">
-		<h2>Washing</h2>
-		Name:
-		<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    Dropdown
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li><a href="#">Action</a></li>
-    <li><a href="#">Another action</a></li>
-    <li><a href="#">Something else here</a></li>
-    <li role="separator" class="divider"></li>
-    <li><a href="#">Separated link</a></li>
-  </ul>
 </div>
-		<br> Payment:<br> <input type="text" id="amount_func2"><br>
-		<button id="button_func2">Pay</button>
-		<button
-				onclick="document.getElementById('func2_on').style.display='none';document.getElementById('func2_off').style.display='none'">
-			Close</button>
-	</div>
-	<div id="func2_off" class="black_overlay"></div>
-	<!--Transfer Pop-up-->
-	<div id="functrans_on" class="white_content">
-		<h2>Transfer</h2>
-		From(Name):
-		<div class="dropdown">
-			<button onclick="dropDownFunction('funcTransFromDropdown')" class="dropbtn" id="name_trans_from">Name</button>
-			<div id="funcTransFromDropdown" class="dropdown-content">
-				<a onclick="setUserinDropdown('car1','name_trans_from')">car1</a>
-				<a onclick="setUserinDropdown('car2','name_trans_from')">car2</a>
-			</div>
-		</div>
-		To(Name):
-		<div class="dropdown">
-			<button onclick="dropDownFunction('funcTransToDropdown')" class="dropbtn" id="name_trans_to">Name</button>
-			<div id="funcTransToDropdown" class="dropdown-content">
-				<a onclick="setUserinDropdown('car1','name_trans_to')">car1</a>
-				<a onclick="setUserinDropdown('car2','name_trans_to')">car2</a>
-			</div>
-		</div>
-		<br> Amount: <br>
-		<input id="amount_transfer" type="text"><br>
-		<button id="button_transfer">Submit</button>
-		<button
-				onclick="document.getElementById('functrans_on').style.display='none';document.getElementById('functrans_off').style.display='none'">
-			Close</button>
-	</div>
-	<div id="functrans_off" class="black_overlay"></div>
-	<!--Query Pop-up-->
-	<div id="funcq_on" class="white_content">
-		<h2>Query</h2>
-		Name:
-		<div class="dropdown">
-			<button onclick="dropDownFunction('funcQueryDropdown')" class="dropbtn" id="name_query">Name</button>
-			<div id="funcQueryDropdown" class="dropdown-content">
-				<a onclick="setUserinDropdown('car1','name_query')">car1</a>
-				<a onclick="setUserinDropdown('car2','name_query')">car2</a>
-				<a onclick="setUserinDropdown('parking','name_query')">parking</a>
-				<a onclick="setUserinDropdown('carwashing','name_query')">carwashing</a>
-				<a onclick="setUserinDropdown('toll','name_query')">toll</a>
-				<a onclick="setUserinDropdown('uber','name_query')">uber</a>
-			</div>
-		</div>
-		<br> Amount: <br> <input id="amount_query" type="text"
-								 readonly><br>
-		<button id="button_query">Submit</button>
-		<button
-				onclick="document.getElementById('funcq_on').style.display='none';document.getElementById('funcq_off').style.display='none'">
-			Close</button>
-	</div>
-	<div id="funcq_off" class="black_overlay"></div>
-	<!--Toll Pop-up-->
-	<div id="func3_on" class="white_content">
-		<h2>Toll</h2>
-		Name:
-		<div class="dropdown">
-			<button onclick="dropDownFunction('func3Dropdown')" class="dropbtn" id="name_func3">Name</button>
-			<div id="func3Dropdown" class="dropdown-content">
-				<a onclick="setUserinDropdown('car1','name_func3')">car1</a>
-				<a onclick="setUserinDropdown('car2','name_func3')">car2</a>
-			</div>
-		</div>
-		<br> Payment:<br> <input type="text" id="amount_func3"><br>
-		<button id="button_func3">Pay</button>
-		<button
-				onclick="document.getElementById('func3_on').style.display='none';document.getElementById('func3_off').style.display='none'">
-			Close</button>
-	</div>
-	<div id="func3_off" class="black_overlay"></div>
+
+<!--Parking Pop-up-->
+<div id="func1_on" class="white_content">
+	<h2>Parking</h2>
+	Name:
+	<select id="dropdown_list_parking">
+
+		<script>
+			for(i=0;i<userList.length;i++){
+				document.getElementById("dropdown_list_parking").options.add(new Option(userList[i],userList[i]));
+			}
+		</script>
+	</select>
+	<br>
+	Payment:<br> <input type="text" id="amount_func1"><br>
+	<button id="button_func1">Pay</button>
+	<button
+			onclick="document.getElementById('func1_on').style.display='none';document.getElementById('func1_off').style.display='none'">
+		Close</button>
+</div>
+<div id="func1_off" class="black_overlay"></div>
+<!--Uber Pop-up-->
+<div id="func4_on" class="white_content">
+	<h2>Uber</h2>
+	Name:
+	<select id="dropdown_list_uber">
+
+		<script>
+			for(i=0;i<userList.length;i++){
+				document.getElementById("dropdown_list_uber").options.add(new Option(userList[i],userList[i]));
+			}
+		</script>
+	</select>
+
+	<br> Payment:<br> <input type="text" id="amount_func4"><br>
+	<button id="button_func4">Pay</button>
+	<button
+			onclick="document.getElementById('func4_on').style.display='none';document.getElementById('func4_off').style.display='none'">
+		Close</button>
+</div>
+<div id="func4_off" class="black_overlay"></div>
+<!--Washing Pop-up-->
+<div id="func2_on" class="white_content">
+	<h2>Washing</h2>
+	Name:
+	<select id="dropdown_list_washing">
+
+		<script>
+			for(i=0;i<userList.length;i++){
+				document.getElementById("dropdown_list_washing").options.add(new Option(userList[i],userList[i]));
+			}
+		</script>
+	</select>
+	<br> Payment:<br> <input type="text" id="amount_func2"><br>
+	<button id="button_func2">Pay</button>
+	<button
+			onclick="document.getElementById('func2_on').style.display='none';document.getElementById('func2_off').style.display='none'">
+		Close</button>
+</div>
+<div id="func2_off" class="black_overlay"></div>
+<!--Transfer Pop-up-->
+<div id="functrans_on" class="white_content">
+	<h2>Transfer</h2>
+	From:
+	<select id="dropdown_list_transfer_from">
+
+		<script>
+			for(i=0;i<userList.length;i++){
+				document.getElementById("dropdown_list_transfer_from").options.add(new Option(userList[i],userList[i]));
+			}
+		</script>
+	</select>
+	To:
+	<select id="dropdown_list_transfer_to">
+
+		<script>
+			for(i=0;i<userList.length;i++){
+				document.getElementById("dropdown_list_transfer_to").options.add(new Option(userList[i],userList[i]));
+			}
+		</script>
+	</select>
+	<br> Amount: <br>
+	<input id="amount_transfer" type="text"><br>
+	<button id="button_transfer">Submit</button>
+	<button
+			onclick="document.getElementById('functrans_on').style.display='none';document.getElementById('functrans_off').style.display='none'">
+		Close</button>
+</div>
+<div id="functrans_off" class="black_overlay"></div>
+<!--Query Pop-up-->
+<div id="funcq_on" class="white_content">
+	<h2>Query</h2>
+	Name:
+	<select id="dropdown_list_query">
+
+		<script>
+			for(i=0;i<userList.length;i++){
+				document.getElementById("dropdown_list_query").options.add(new Option(userList[i],userList[i]));
+			}
+		</script>
+	</select>
+	<br> Amount: <br> <input id="amount_query" type="text"
+							 readonly><br>
+	<button id="button_query">Submit</button>
+	<button
+			onclick="document.getElementById('funcq_on').style.display='none';document.getElementById('funcq_off').style.display='none'">
+		Close</button>
+</div>
+<div id="funcq_off" class="black_overlay"></div>
+<!--Toll Pop-up-->
+<div id="func3_on" class="white_content">
+	<h2>Toll</h2>
+	Name:
+	<select id="dropdown_list_toll">
+
+		<script>
+			for(i=0;i<userList.length;i++){
+				document.getElementById("dropdown_list_toll").options.add(new Option(userList[i],userList[i]));
+			}
+		</script>
+	</select>
+	<br> Payment:<br> <input type="text" id="amount_func3"><br>
+	<button id="button_func3">Pay</button>
+	<button
+			onclick="document.getElementById('func3_on').style.display='none';document.getElementById('func3_off').style.display='none'">
+		Close</button>
+</div>
+<div id="func3_off" class="black_overlay"></div>
+<!--Deposit Pop-up-->
+<div id="funcDeposit_on" class="white_content">
+	<h2>Deposit</h2>
+	Name:
+	<select id="dropdown_list_deposit">
+
+		<script>
+			for(i=0;i<userList.length;i++){
+				document.getElementById("dropdown_list_deposit").options.add(new Option(userList[i],userList[i]));
+			}
+		</script>
+	</select>
+	<br> Amount:<br> <input type="text" id="amount_deposit"><br>
+	<button id="button_deposit">Submit</button>
+	<button
+			onclick="document.getElementById('funcDeposit_on').style.display='none';document.getElementById('funcDeposit_off').style.display='none'">
+		Close</button>
+</div>
+<div id="funcDeposit_off" class="black_overlay"></div>
 </body>
 </html>
