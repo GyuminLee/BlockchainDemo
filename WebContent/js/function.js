@@ -22,13 +22,8 @@ var userInfo = {
 }
 
 var deviceInfo = {
-<<<<<<< HEAD
-		'DEVICE_PARKING' : "http://10.223.116.21:5000/",
-		'DEVICE_CARWASH' : "http://10.223.116.20:5000/"
-=======
 	'DEVICE_TOLL' : "http://10.223.116.21:5000/"
 	//'DEVICE_CARWASH' : "http://10.223.90.99:5000/"
->>>>>>> b8799ac176664ae48f826396aacc1b8669d06960
 }
 
 var priceInfo = {
