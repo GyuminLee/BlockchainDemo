@@ -194,7 +194,7 @@
 <!--Transfer Pop-up-->
 <div id="functrans_on" class="white_content">
 	<h2>Transfer</h2>
-	From(Name):
+	From:
 	<select id="dropdown_list_transfer_from">
 
 		<script>
@@ -203,11 +203,11 @@
 			}
 		</script>
 	</select>
-	To(Name):
+	To:
 	<select id="dropdown_list_transfer_to">
 
 		<script>
-			for(i=0;i<NUM_USER;i++){
+			for(i=0;i<userList.length;i++){
 				document.getElementById("dropdown_list_transfer_to").options.add(new Option(userList[i],userList[i]));
 			}
 		</script>

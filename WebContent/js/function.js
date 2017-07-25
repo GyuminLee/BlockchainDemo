@@ -297,6 +297,8 @@ function updateBlockInfo(){
 	for(i = BLOCKS_LENGTH-1; i >= BLOCKS_LENGTH-10; i--) {
 		sendGetRequest(functionType.BLOCKDATA, i)
 	}
+
+	showPage()
 }
 
 function sendGetRequest(type, blockNumber) {//To get the number of blocks , input 0 at blocknumber
@@ -336,11 +338,16 @@ function createBlock(blockid, transactionData){
 		html += date + "<br>";
 		html += transactionData[j].txid + "<br>";
 		html += atob(transactionData[j].chaincodeID) + "<br>";
-		html += payload.substr(141, payload.length) + "<br>";
+		html += "<b>" + payload.substr(141, payload.length) + "</b><br>";
 		html += "</p>";
 	}
 	html += "</div></div>";
 	panelDiv.innerHTML = html;
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("panelDiv").style.display = "block";
 }
 
 function updateDashboard(){
