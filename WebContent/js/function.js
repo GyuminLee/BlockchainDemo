@@ -194,7 +194,6 @@ function sendRequest(type, inputJSON) {
 
 				result_bluemix = parseInt(response.result.message);
         		//document.getElementById("amount_query").value = response.result.message;
-        		
         		//console.log("name= "+ inputJSON.params.ctorMsg.args[0] + ",balance= " + response.result.message)
 				
 				if(UPDATEDASH_FLAG < NUM_USER){

@@ -38,7 +38,10 @@
             	transfer(document.getElementById("name_func3").value, "toll", document.getElementById("amount_func3").value)
 		   });
             $("button#button_func4").click(function(){
-            	transfer(document.getElementById("name_func4").value, "uber", document.getElementById("amount_func4").value)
+//				alert(document.getElementById("dropdown_list").options[document.getElementById("dropdown_list").selectedIndex].value);
+//				alert(document.getElementById("name_func4").value);
+
+				transfer(document.getElementById("dropdown_list").options[document.getElementById("dropdown_list").selectedIndex].value, "uber", document.getElementById("amount_func4").value)
 		   });
             $("button#button_query").click(function(){
 				query(document.getElementById("name_query").value);
@@ -49,11 +52,8 @@
             $("button#button_adduser").click(function(){
 				addUser(document.getElementById("name_adduser").value, document.getElementById("amount_adduser").value)
             });
-            
-           
         });
-        
-       
+            
 	</script>
 </head>
 
@@ -159,13 +159,22 @@
 	<div id="func4_on" class="white_content">
 		<h2>Uber</h2>
 		Name:
-		<div class="dropdown">
-			<button onclick="dropDownFunction('func4Dropdown')"  class="dropbtn" id="name_func4">Name</button>
-			<div id="func4Dropdown" class="dropdown-content">
-				<a onclick="setUserinDropdown('car1','name_func4')">car1</a>
-				<a onclick="setUserinDropdown('car2','name_func4')">car2</a>
-			</div>
-		</div>
+		<select id="dropdown_list">
+
+			<script>
+				for(i=0;i<NUM_USER;i++){
+					document.getElementById("dropdown_list").options.add(new Option(userList[i],userList[i]));
+				}
+//				alert(document.getElementById("dropdown_list").options[document.getElementById("dropdown_list").selectedIndex].value);
+			</script>
+		</select>
+		<!--<div class="dropdown">-->
+			<!--<button onclick="dropDownFunction('func4Dropdown')"  class="dropbtn" id="name_func4">Name</button>-->
+			<!--<div id="func4Dropdown" class="dropdown-content">-->
+				<!--<a onclick="setUserinDropdown('car1','name_func4')">car1</a>-->
+				<!--<a onclick="setUserinDropdown('car2','name_func4')">car2</a>-->
+			<!--</div>-->
+		<!--</div>-->
 		<br> Payment:<br> <input type="text" id="amount_func4"><br>
 		<button id="button_func4">Pay</button>
 		<button
