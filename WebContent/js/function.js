@@ -5,7 +5,8 @@ var functionType = {
 	'ADDUSER'		: 3,
 	'BLOCKDATA' 	: 4,
 	'BLOCKNUMBER' 	: 5,
-	'DEPOSIT'       : 6
+	'DEPOSIT'       : 6,
+	'QUERY_DASHBOARD': 7
 }
 var chaincode = {
 	//car1, car2
@@ -21,7 +22,7 @@ var userInfo = {
 }
 
 var deviceInfo = {
-	'DEVICE_PARKING' : "http://10.223.116.21:5000/"
+	'DEVICE_TOLL' : "http://10.223.116.21:5000/"
 	//'DEVICE_CARWASH' : "http://10.223.90.99:5000/"
 }
 
@@ -34,8 +35,7 @@ var userList = [
 	"car1",
 	"car2",
 	"car3",
-	"car4",
-	"carwashing"
+	"car4"
 ]
 
 var latestStoredRFID = new Date();
@@ -55,12 +55,9 @@ function checkNewData() {
 			dataType: "json",
 			success: function (response,tag) {
 				receiveRFID(response)
-<<<<<<< HEAD
 			},
 			error: function (response,tag) {
 				// console.log(response)
-=======
->>>>>>> 976d24c02bf98977210707e06c203f69eeb767fd
 			}
 		});
 	});
@@ -77,7 +74,7 @@ function receiveRFID(response){
 			latestStoredRFID = currentTime
 			console.log("Update timestamp" + latestStoredRFID)
 			showLCD("transaction", "processing")
-			transfer(response[i].cardUID, "parking", 10)
+			transfer(response[i].cardUID, "toll", 10)
 		}
 	}
 }
@@ -137,7 +134,7 @@ function transfer(sender, receiver, amount) {
 		};
 		query(sender);
 		if(result_bluemix>=amount){
-			//TRANS_COUNT = 0;
+			TRANS_COUNT = 0;
 			sendRequest(functionType.TRANSFER, jsonForSender);
 			sendRequest(functionType.TRANSFER, jsonForReceiver);
 		}
@@ -211,14 +208,18 @@ function sendRequest(type, inputJSON) {
 				//console.log(result_bluemix);
 				//console.log("name= "+ inputJSON.params.ctorMsg.args[0] + ",balance= " + response.result.message)
 
-				//if(UPDATEDASH_FLAG < NUM_USER){
-				//	createTable(inputJSON.params.ctorMsg.args[0], inputJSON.params.chaincodeID.name, response.result.message);
-				//	UPDATEDASH_FLAG++;
-				//}
-
 			}else if(type == functionType.DEPOSIT){
 				alert("Deposit success!");
+
+			}else if(type == functionType.QUERY_DASHBOARD){
+				if(UPDATEDASH_FLAG < NUM_USER){
+					createTable(inputJSON.params.ctorMsg.args[0], inputJSON.params.chaincodeID.name, response.result.message);
+					UPDATEDASH_FLAG++;
+				}
 			}
+		},
+		error: function (response,tag) {
+			console.log(response)
 		}
 	});
 }
@@ -254,7 +255,7 @@ function deposit(userName,amount){
 function showLCD(line1, line2){
 	$.ajax({
 		type: "GET",
-		url: deviceInfo.DEVICE_PARKING+"lcd?line1="+line1+"&line2="+line2,
+		url: deviceInfo.DEVICE_TOLL+"lcd?line1="+line1+"&line2="+line2,
 		contentType: "application/json",
 		dataType: "json",
 		success: function (response,tag) {
@@ -347,19 +348,48 @@ function updateDashboard(){
 	var table = document.getElementById("innerTable");
 	table.innerHTML = "";
 	for(var i = 0; i < userList.length; i++){
-		query(userList[i]);
+		queryDashboard(userList[i]);
 	}
-	query("carwash");
-	query("parking");
-<<<<<<< HEAD
-	query("toll");
-	query("uber");
-	
-=======
-	// query("toll");
-	// query("uber");
+	queryDashboard("carwash");
+	queryDashboard("parking");
+	queryDashboard("toll");
+	queryDashboard("uber");
 
->>>>>>> 976d24c02bf98977210707e06c203f69eeb767fd
+}
+
+function queryDashboard(userName) {
+
+	var chaincodeID = chaincode.USER;
+	if(userName == "parking") {
+		chaincodeID = chaincode.PARKING;
+	} else if(userName == "carwash") {
+		chaincodeID = chaincode.CARWASH;
+	} else if(userName == "toll") {
+		chaincodeID = chaincode.TOLL;
+	} else if(userName == "uber") {
+		chaincodeID = chaincode.UBER;
+	}
+
+	var json =
+	{
+		"jsonrpc": "2.0",
+		"method": "query",
+		"params": {
+			"type": 1,
+			"chaincodeID": {
+				"name": chaincodeID
+			},
+			"ctorMsg": {
+				"function": "query",
+				"args": [
+					userName
+				]
+			},
+			"secureContext": userInfo.secureContext
+		},
+		"id": 1
+	};
+	sendRequest(functionType.QUERY_DASHBOARD, json);
 }
 
 function createTable(service, id, balance){

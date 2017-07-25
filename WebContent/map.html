@@ -73,7 +73,7 @@
 		<div class="col-sm-3 col-md-2 sidebar">
 			<ul class="nav nav-sidebar">
 				<li><a href="index.html">Dashboard</a></li>
-				<li><a href="parking.html">Parking Service</a></li>
+				<li><a href="parking.html">Toll Service</a></li>
 				<li  class="active"><a href="map.html">Cute Map</a></li>
 				<li><a href="visual_block.html">Visual Block</a></li>
 			</ul>
@@ -139,20 +139,11 @@
 	<select id="dropdown_list_parking">
 
 		<script>
-			for(i=0;i<NUM_USER-2;i++){
+			for(i=0;i<userList.length;i++){
 				document.getElementById("dropdown_list_parking").options.add(new Option(userList[i],userList[i]));
 			}
 		</script>
 	</select>
-
-	<!--  <div class="dropdown">
-                <button onclick="dropDownFunction('func1Dropdown')" class="dropbtn" id="name_func1">Name</button>
-                <div id="func1Dropdown" class="dropdown-content">
-                    <a onclick="setUserinDropdown('car1','name_func1')">car1</a>
-                    <a onclick="setUserinDropdown('car2','name_func1')">car2</a>
-                </div>
-            </div>
-            -->
 	<br>
 	Payment:<br> <input type="text" id="amount_func1"><br>
 	<button id="button_func1">Pay</button>
@@ -168,7 +159,7 @@
 	<select id="dropdown_list_uber">
 
 		<script>
-			for(i=0;i<NUM_USER-2;i++){
+			for(i=0;i<userList.length;i++){
 				document.getElementById("dropdown_list_uber").options.add(new Option(userList[i],userList[i]));
 			}
 		</script>
@@ -188,7 +179,7 @@
 	<select id="dropdown_list_washing">
 
 		<script>
-			for(i=0;i<NUM_USER-2;i++){
+			for(i=0;i<userList.length;i++){
 				document.getElementById("dropdown_list_washing").options.add(new Option(userList[i],userList[i]));
 			}
 		</script>
@@ -207,7 +198,7 @@
 	<select id="dropdown_list_transfer_from">
 
 		<script>
-			for(i=0;i<NUM_USER-2;i++){
+			for(i=0;i<userList.length;i++){
 				document.getElementById("dropdown_list_transfer_from").options.add(new Option(userList[i],userList[i]));
 			}
 		</script>
@@ -236,7 +227,7 @@
 	<select id="dropdown_list_query">
 
 		<script>
-			for(i=0;i<NUM_USER-2;i++){
+			for(i=0;i<userList.length;i++){
 				document.getElementById("dropdown_list_query").options.add(new Option(userList[i],userList[i]));
 			}
 		</script>
@@ -256,7 +247,7 @@
 	<select id="dropdown_list_toll">
 
 		<script>
-			for(i=0;i<NUM_USER-2;i++){
+			for(i=0;i<userList.length;i++){
 				document.getElementById("dropdown_list_toll").options.add(new Option(userList[i],userList[i]));
 			}
 		</script>
@@ -275,7 +266,7 @@
 	<select id="dropdown_list_deposit">
 
 		<script>
-			for(i=0;i<NUM_USER-2;i++){
+			for(i=0;i<userList.length;i++){
 				document.getElementById("dropdown_list_deposit").options.add(new Option(userList[i],userList[i]));
 			}
 		</script>
