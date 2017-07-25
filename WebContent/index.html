@@ -69,16 +69,15 @@
 
    <script>
       $(document).ready(function(){
-        // updateDashboard();
-
-        // window.setInterval(function(){
-        //   updateDashboard();
-        // }, 10000);
-
-        checkNewData();
+        updateDashboard();
         window.setInterval(function(){
-          checkNewData();
-        }, 3000);
+          updateDashboard();
+        }, 10000);
+
+        // checkNewData();
+        // window.setInterval(function(){
+        //   checkNewData();
+        // }, 3000);
       });
   </script> 
 

@@ -39,7 +39,7 @@ var userList = [
 var latestStoredRFID = new Date(2017,6,1);
 var result_bluemix = -1;
 var UPDATEDASH_FLAG = 0;
-var NUM_USER = 2 + userList.length;
+var NUM_USER = 4 + userList.length;
 var TRANS_COUNT = 0;
 var BLOCKS_LENGTH = 0;
 
@@ -56,7 +56,7 @@ function checkNewData() {
 				receiveRFID(response)
 			},
 			error: function (response,tag) {
-				console.log(response)
+				// console.log(response)
 			}
 		});
 	});
@@ -319,8 +319,8 @@ function updateDashboard(){
 	}
 	query("carwash");
 	query("parking");
-	// query("toll");
-	// query("uber");
+	query("toll");
+	query("uber");
 	
 }
 
