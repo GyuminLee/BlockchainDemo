@@ -6,7 +6,8 @@ var functionType = {
 	'BLOCKDATA' 	: 4,
 	'BLOCKNUMBER' 	: 5,
 	'DEPOSIT'       : 6,
-	'QUERY_DASHBOARD': 7
+	'QUERY_DASHBOARD': 7,
+	'GETSERVICEHISTORY': 8
 }
 var chaincode = {
 	//car1, car2
@@ -303,7 +304,7 @@ function updateBlockInfo(){
 
 function sendGetRequest(type, blockNumber) {//To get the number of blocks , input 0 at blocknumber
 	var url = "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chain"
-	if(type == functionType.BLOCKDATA) {
+	if(type !== functionType.BLOCKNUMBER) {
 		url = "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chain/blocks/" + blockNumber
 	}
 	$.ajax({
@@ -320,6 +321,8 @@ function sendGetRequest(type, blockNumber) {//To get the number of blocks , inpu
 			} else if(type == functionType.BLOCKNUMBER) { // GET Blocks length
 				//console.log("The number of blocks : " + response.height)
 				BLOCKS_LENGTH = response.height
+			} else if(type == functionType.GETSERVICEHISTORY){
+				processHistoryData(response.transactions)
 			}
 		}
 	});
@@ -408,6 +411,46 @@ function createTable(service, id, balance){
 	cell1.innerHTML = service;
 	cell2.innerHTML = id;
 	cell3.innerHTML = balance;
+}
+
+function getServiceHistory(service){
+	var table = document.getElementById("innerTable");
+	table.innerHTML = "";
+	sendGetRequest(functionType.BLOCKNUMBER, 0)
+	for(i = BLOCKS_LENGTH-1; i >= BLOCKS_LENGTH-10; i--) {
+		sendGetRequest(functionType.GETSERVICEHISTORY, i)
+	}
+}
+
+function processHistoryData(transactionData){
+	if(transactionData.length >=2){
+		var date = new Date(1000 * transactionData[0].timestamp.seconds)
+		var user = extractUserFromData(atob(transactionData[0].payload))
+		var service = extractUserFromData(atob(transactionData[1].payload))
+		
+		if(!service[2].localeCompare("toll")){
+			console.log(service[2])
+			createHistoryTable(date, user[2], service[2], service[3])
+		}
+	}
+}
+
+function extractUserFromData(data){
+	var user = data.substr(141).split(/\s+/)
+	return user
+}
+
+function createHistoryTable(time, service, id, balance){
+	var table = document.getElementById("innerTable");
+	var row = table.insertRow();
+	var cell1 = row.insertCell(0);
+	var cell2 = row.insertCell(1);
+	var cell3 = row.insertCell(2);
+	var cell4 = row.insertCell(3);
+	cell1.innerHTML = time;
+	cell2.innerHTML = service;
+	cell3.innerHTML = id;
+	cell4.innerHTML = balance;
 }
 
 function addUser(userName, amount) {

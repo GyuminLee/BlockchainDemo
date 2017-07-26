@@ -49,14 +49,28 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Toll Log</h1>
 
-          <!-- TODO : -->
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>User</th>
+                  <th>Service</th>
+                  <th>Pay</th>
+                </tr>
+              </thead>
+              <tbody   id="innerTable">
+               
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
 
    <script>
         $(document).ready(function(){
-
+          getServiceHistory("toll")
         });
   </script> 
 
