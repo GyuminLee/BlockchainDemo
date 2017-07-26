@@ -429,7 +429,6 @@ function processHistoryData(transactionData){
 		var service = extractUserFromData(atob(transactionData[1].payload))
 		
 		if(!service[2].localeCompare("toll")){
-			console.log(service[2])
 			createHistoryTable(date, user[2], service[2], service[3])
 		}
 	}
