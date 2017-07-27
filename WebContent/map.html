@@ -27,13 +27,11 @@
 
 	<script>
 		$(document).ready(function(){
-
 			$("button#button_func1").click(function(){
 				transfer(document.getElementById("dropdown_list_parking").options[document.getElementById("dropdown_list_parking").selectedIndex].value, "parking", document.getElementById("amount_func1").value)
 			});
 			$("button#button_func2").click(function(){
 				transfer(document.getElementById("dropdown_list_washing").options[document.getElementById("dropdown_list_washing").selectedIndex].value, "carwash", document.getElementById("amount_func2").value)
-
 			});
 			$("button#button_func3").click(function(){
 				transfer(document.getElementById("dropdown_list_toll").options[document.getElementById("dropdown_list_toll").selectedIndex].value, "toll", document.getElementById("amount_func3").value)
@@ -53,7 +51,6 @@
 			$("button#button_adduser").click(function(){
 				addUser(document.getElementById("name_adduser").value, document.getElementById("amount_adduser").value)
 			});
-
 		});
 	</script>
 </head>
@@ -73,7 +70,7 @@
 		<div class="col-sm-3 col-md-2 sidebar">
 			<ul class="nav nav-sidebar">
 				<li><a href="index.html">Dashboard</a></li>
-				<li><a href="parking.html">Toll Service</a></li>
+				<li><a href="parking.html">Parking Service</a></li>
 				<li  class="active"><a href="map.html">Cute Map</a></li>
 				<li><a href="visual_block.html">Visual Block</a></li>
 			</ul>
@@ -81,51 +78,10 @@
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 			<h1 class="page-header">Cute Map</h1>
 
-
-	<div id="main" align="center">
-		<img src="img/map.jpg" alt="Map" id="image_map"
-			style="position: absolute; left: 270px; top: 20px">
-	</div>
-	<!--Parking-->
-	<button style="position: absolute; left: 400px; top: 120px" 
-	type="button" class="btn btn-warning"
-	onclick="document.getElementById('func1_on').style.display='block';document.getElementById('func1_off').style.display='block'">
-	Parking Service</button>
-	
-	<!--func2_Washing-->
-	<button type="button" class="btn btn-warning"
-		style="position: absolute; left: 630px; top: 120px"
-		onclick="document.getElementById('func2_on').style.display='block';document.getElementById('func2_off').style.display='block'">
-		Washing Service</button>
-	
-	<!--func3_Toll-->
-	
-	<button type="button" class="btn btn-warning"
-		style="position: absolute; left: 850px; top: 120px"
-		onclick="document.getElementById('func3_on').style.display='block';document.getElementById('func3_off').style.display='block'">
-		Toll Service</button>
-	
-	<!-- func4_Uber -->
-	<button type="button" class="btn btn-warning"
-		style="position: absolute; left: 650px; top: 300px"
-		onclick="document.getElementById('func4_on').style.display='block';document.getElementById('func4_off').style.display='block'">
-		Uber Service</button>
-	
-	<!--func_query
-		<button type="button" class="btn btn-warning"
-		style="position: absolute; left: 130px; top: 100px"
-		onclick="document.getElementById('funcq_on').style.display='block';document.getElementById('funcq_off').style.display='block'">
-		Query</button>
-	-->
-	<!--func_transfer-->
-		<button type="button" class="btn btn-warning"
-		style="position: absolute; left: 130px; top: 120px"
-		onclick="document.getElementById('functrans_on').style.display='block';document.getElementById('functrans_off').style.display='block'">
-		Transfer</button>
-	    </div>
-      </div>
-    </div>
-
+			<div id="main" align="center">
+				<img src="img/map.jpg" alt="Map" id="image_map"
+					 style="position: absolute; left: 270px; top: 20px">
+			</div>
 
 			<!--Parking-->
 			<button style="position: absolute; left: 400px; top: 120px"
@@ -185,6 +141,15 @@
 			}
 		</script>
 	</select>
+
+	<!--  <div class="dropdown">
+                <button onclick="dropDownFunction('func1Dropdown')" class="dropbtn" id="name_func1">Name</button>
+                <div id="func1Dropdown" class="dropdown-content">
+                    <a onclick="setUserinDropdown('car1','name_func1')">car1</a>
+                    <a onclick="setUserinDropdown('car2','name_func1')">car2</a>
+                </div>
+            </div>
+            -->
 	<br>
 	Payment:<br> <input type="text" id="amount_func1"><br>
 	<button id="button_func1">Pay</button>
@@ -235,7 +200,7 @@
 <!--Transfer Pop-up-->
 <div id="functrans_on" class="white_content">
 	<h2>Transfer</h2>
-	From:
+	From(Name):
 	<select id="dropdown_list_transfer_from">
 
 		<script>
@@ -244,7 +209,7 @@
 			}
 		</script>
 	</select>
-	To:
+	To(Name):
 	<select id="dropdown_list_transfer_to">
 
 		<script>
