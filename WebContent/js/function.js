@@ -18,12 +18,12 @@ var chaincode = {
 	'UBER'		: "9f5c99265f9d21a773ddc9174c2cc250d4a778bcc57abeaff944695df0e97c59f13c957ed8743a3d60823e5a7a5c812ef793e40889da1ceb365842f6c6f62873"
 }
 var userInfo = {
-	'secureContext' : "user_type1_1",
+	'secureContext' : "user_type1_2",
 	'secureContext0' : "user_type1_0"
 }
 
 var deviceInfo = {
-	'DEVICE_TOLL' : "http://10.223.116.21:5000/"
+	'DEVICE_TOLL' : "http://10.223.116.20:5000/"
 	//'DEVICE_CARWASH' : "http://10.223.90.99:5000/"
 }
 
@@ -33,10 +33,13 @@ var priceInfo = {
 }
 
 var userList = [
+	"5b3133362c20342c203234352c203130392c2032305d",
+	"5b38362c2039302c2033382c203132362c2038345d",
+	"5b36312c203139322c2033392c2039382c203138345d",
 	"car1",
 	"car2",
 	"car3",
-	"car4"
+	"car4" 
 ]
 
 var latestStoredRFID = new Date();
@@ -51,7 +54,7 @@ function checkNewData() {
 
 		$.ajax({
 			type: "GET",
-			url: deviceInfo[key] + "rfid",
+			url: deviceInfo[key] + "rfid/",
 			contentType: "application/json",
 			dataType: "json",
 			success: function (response,tag) {
@@ -68,8 +71,8 @@ function checkNewData() {
 function receiveRFID(response){
 	for (var i = response.length-1; i >=0 ; i--) {
 		var currentTime = new Date(Date.parse(response[i].timestamp))
-		//console.log(latestStoredRFID)
-
+		// console.log(latestStoredRFID)
+		// console.log(currentTime)
 		if(currentTime > latestStoredRFID){
 			//Success find new RFID
 			latestStoredRFID = currentTime
@@ -188,7 +191,7 @@ function sendRequest(type, inputJSON) {
 
 	$.ajax({
 		type: "POST",
-		url: "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chaincode",
+		url: "https://6128a651373e479f968b58f35ea9b7cb-vp2.us.blockchain.ibm.com:5001/chaincode",
 		contentType: "application/json",
 		async:false,
 		dataType: "json", //type of return value
@@ -196,16 +199,19 @@ function sendRequest(type, inputJSON) {
 		success: function (response,tag) {
 
 			if(type == functionType.TRANSFER) { // to transfer
-				console.log(JSON.stringify(response))
+				// console.log(JSON.stringify(response))
 				TRANS_COUNT++;
 				if(TRANS_COUNT==2){
 					showLCD("transaction", "success")
+					alert("transfer success!")
 				}
 
 			} else if(type == functionType.QUERY) { // to query
 
-				result_bluemix = parseInt(response.result.message);
-				document.getElementById("amount_query").value = response.result.message;
+				if(response!==null){
+					result_bluemix = parseInt(response.result.message);
+				}
+				// document.getElementById("amount_query").value = response.result.message;
 				//console.log(result_bluemix);
 				//console.log("name= "+ inputJSON.params.ctorMsg.args[0] + ",balance= " + response.result.message)
 
@@ -213,6 +219,7 @@ function sendRequest(type, inputJSON) {
 				alert("Deposit success!");
 
 			}else if(type == functionType.QUERY_DASHBOARD){
+				// console.log(response)
 				if(UPDATEDASH_FLAG < NUM_USER){
 					createTable(inputJSON.params.ctorMsg.args[0], inputJSON.params.chaincodeID.name, response.result.message);
 					UPDATEDASH_FLAG++;
@@ -303,9 +310,9 @@ function updateBlockInfo(){
 }
 
 function sendGetRequest(type, blockNumber) {//To get the number of blocks , input 0 at blocknumber
-	var url = "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chain"
+	var url = "https://6128a651373e479f968b58f35ea9b7cb-vp2.us.blockchain.ibm.com:5001/chain"
 	if(type !== functionType.BLOCKNUMBER) {
-		url = "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chain/blocks/" + blockNumber
+		url = "https://6128a651373e479f968b58f35ea9b7cb-vp2.us.blockchain.ibm.com:5001/chain/blocks/" + blockNumber
 	}
 	$.ajax({
 		type: "GET",
@@ -475,8 +482,8 @@ function addUser(userName, amount) {
 
 	$.ajax({
 		type: "POST",
-		//vp1
-		url: "https://6128a651373e479f968b58f35ea9b7cb-vp1.us.blockchain.ibm.com:5001/chaincode",
+		//vp2
+		url: "https://6128a651373e479f968b58f35ea9b7cb-vp2.us.blockchain.ibm.com:5001/chaincode",
 		contentType: "application/json",
 		async:false,
 		dataType: "json", //type of return value
