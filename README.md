@@ -15,7 +15,7 @@ We use IBM Bluemix as our service backend.
 
 Front-end application includes Javascript, CSS, HTML, Bootstrap.
 
-- index.html shows the dashboard of every users/ services in our application
+- index.html shows the dashboard of every users/ services in our application, the listener of raspberry-pi also trigger here.
 
 - map.html can perform transfer/ deposit
 
